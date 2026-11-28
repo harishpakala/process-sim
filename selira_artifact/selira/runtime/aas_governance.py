@@ -153,6 +153,7 @@ class AASGovernance:
             self._provider.update(updated)
             return {
                 "version": version,
+                "available_scopes": sorted(allowed),
                 **updated,
                 "source": "server_operator_attestation",
             }
