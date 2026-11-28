@@ -80,3 +80,8 @@ def check_select(query):
             for v in x: walk(v)
     walk(parsed)
     return query
+
+def supply_prefixes(query,prefixes):
+    """Supply only known missing namespace declarations; preserve model query body."""
+    declared={m.group(1) for m in re.finditer(r'\bPREFIX\s+([\w-]+):\s*<[^>]+>',query,re.I)}
+    return '\n'.join([f'PREFIX {k}: <{v}>' for k,v in sorted(prefixes.items()) if k not in declared]+[query])

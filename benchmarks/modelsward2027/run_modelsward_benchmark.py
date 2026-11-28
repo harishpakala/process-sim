@@ -99,14 +99,15 @@ def main():
         def mark(): r['timings'][stage]=time.perf_counter()-t
         try:
          if a.method=='direct':
-          from direct_sparql import direct_plan,check_select
+          from direct_sparql import direct_plan,check_select,supply_prefixes
           stage='planning'; t=time.perf_counter()
           record=direct_plan(q,schema,mappings,graphs,model=model,endpoint=a.ollama_url)
           mark(); r['planner_record']=record
           if record['status']!='valid_response':
            r['status']=record['status']; continue
           stage='query_policy'; t=time.perf_counter()
-          r['sparql']=record['answer']['sparql']
+          r['raw_sparql']=record['answer']['sparql']
+          r['sparql']=supply_prefixes(r['raw_sparql'],record['prompt']['prefixes'])
           sparql=check_select(r['sparql']); mark()
          else:
           # Fixed display-name normalization; no scenario metadata used for routing.
