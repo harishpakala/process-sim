@@ -1,0 +1,1830 @@
+[
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P1",
+    "record_sha256": "bccc24208ff02c5971284b047171f07e6504e5e76d174590e6e3fa8d7f11b77f",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P2",
+    "record_sha256": "9d3617272143a6aa54e1496da68b000b796eb0a16f7203422380fa10232d3fdb",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P3",
+    "record_sha256": "c238f9756a3c644ebe5a6b2883fb60d7daef594f4ef616bb64b12de292f1a725",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P4",
+    "record_sha256": "a529f989c5ce400de2ea69a232340f7e9949a09aa6d1922bca13b8811ee4f78b",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P5",
+    "record_sha256": "7c59b42c8c886e49a22f70b43ae0e73d5f6bfe9d22a199a446691784c91db032",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P1",
+    "record_sha256": "81a33a660335c8912ba73383a69180ff08c48d5aea542ec6b0ac15667fd4b248",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "deviceType"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P2",
+    "record_sha256": "198ef927601ebed0f3af0c17b1f4643e9168335a2e76594ba6dd50a709b13027",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "deviceType"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P3",
+    "record_sha256": "0d3ce7809fca532aa1bf272ef72020836847152dd89354f0600e107fa08aa523",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "deviceType"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P4",
+    "record_sha256": "58b9209af29cb7090a8ac7eba418945d72d737101e708ade26dcef2aae64e3cf",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "deviceType"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P5",
+    "record_sha256": "d9003550845fdf0288aaa0826e0f03883f58a7067a57d1e05a5fe342272ca0f4",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "deviceType"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P1",
+    "record_sha256": "641d712483dd6c41a7742edc4955942bf1e666d4289ed4c55c5e776c0b330755",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": false,
+    "evidence": "Projects Device and LocalId; contract requires Device alone."
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P2",
+    "record_sha256": "11a304e43a39b5394c5672d030c46b8c647915a6f94f2f59932c89d7f6d4106b",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": false,
+    "evidence": "Projects Device and LocalId; contract requires Device alone."
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P3",
+    "record_sha256": "f7ba0f5769f53fd10959de71d01179a95834825389b8ae18ccf4f442553a7fda",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": false,
+    "evidence": "Projects Device and LocalId; contract requires Device alone."
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P4",
+    "record_sha256": "b69bd424bf2541690cebacf817456c407177d72df030ae42d95d548be1a6a8d0",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": false,
+    "evidence": "Projects Device and LocalId; contract requires Device alone."
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P5",
+    "record_sha256": "5d85e7a572c0cd7ae2bb95ccd1e50001694ed441d46ef7ed8d33550b5363ae3e",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": false,
+    "evidence": "Projects Device and LocalId; contract requires Device alone."
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P1",
+    "record_sha256": "39907f8951da0d925d2de39eb60ec8f6e2ad8bc1199526f57501b2e5b94a74e9",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "instrumentationFunction",
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P2",
+    "record_sha256": "4b219e87a295d3160defd991deb79f00b22f2ba28a14c9123c62b243d25dee78",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "instrumentationFunction",
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P3",
+    "record_sha256": "b1255d6906959909424a51adf690c1b15e91e9931962cb085c280745eeabee01",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "instrumentationFunction",
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P4",
+    "record_sha256": "21824aac384d65914d0f1629a4c0194772c82816fd75fbef3cdc20623fe5814c",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "instrumentationFunction",
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P5",
+    "record_sha256": "63c8cf1ee797d256f37227914969322d61ce0f1f2038cbea7d407c2e6ea2ca44",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "instrumentationFunction",
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P1",
+    "record_sha256": "7e5bc6211e2bb86eb2d96bc23e47dc801efd077ae7123f34de54171b0bd3432e",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "localId"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P5",
+    "record_sha256": "8f34a448a7896089f7c96d38f136a7ca078a5273dcde984744d27393ca867be6",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "localId"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P2",
+    "record_sha256": "cb5ae111b9c85da3734b53bd017933a9278c1333be5658c1f5a09d240ad64020",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "localId"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P3",
+    "record_sha256": "db890038f4a49c20b00f5e60126fdbb27f89a70cc6f096cae4db5f0ba8803dbb",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "localId"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P4",
+    "record_sha256": "7f4e4609e9349dacdc060ee54a2e34f748a9845eed7a71f0f186fcfa17eb57d9",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "localId"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P1",
+    "record_sha256": "297f325cfc837d80e629865fe8469f23faded1a64f2624e0ab9825d1797dab51",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "revision"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P2",
+    "record_sha256": "f1c890de7f01be38680b736310e9195d8c62adaf3ff6ed671574e726cfac0e7d",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "revision"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P3",
+    "record_sha256": "d44e55018551329931afe88beeb2fd6c6dc067d2abdc0a069150cc5e28853829",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "revision"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P4",
+    "record_sha256": "6e8da2adb41512afd2b4cc591f3eb11d6376e003888ca7341742a4437847eb91",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "revision"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P5",
+    "record_sha256": "647ecdc255bbb633d42b5694701fdc9afc75471849366b8533cc880fa38cbeaa",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "revision"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P1",
+    "record_sha256": "e16d9791adcbe5f7e2868e037a4dac7870339f2bafb271015c341029193219e3",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P2",
+    "record_sha256": "3bad10de20d65c94cc485ae15c57876b9faa212651c1e4381a74d61dcbe31c1f",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P3",
+    "record_sha256": "71190348796b408f6a2e2159c98a85375875537d8332eae73539fd7ebebdaca2",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P4",
+    "record_sha256": "2db057f21f51a3f70973b7da626a58edbd3144b723ab5d73f2b8753912161f8b",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "direct",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P5",
+    "record_sha256": "9d2b3ca1d7ac4e39e30dd3d1b802b898a2b23c942285a7a96a5bb1c223777b1c",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "device"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P1",
+    "record_sha256": "b39ca545899a38d0c5aaf7f5f0861f331fb56f607ddff864afa8a24401fc5d03",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P2",
+    "record_sha256": "08d3dc291ea177ab6f6781c8cb32f432bffcdbc57b6903914b91fd5c5c272501",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P3",
+    "record_sha256": "fe2243137f8c291667f0a04c4c75e6d3f7950ed1abcc722db8a25159b9a847eb",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P4",
+    "record_sha256": "6e5c74d4da6549af32f9d2b49e67c86b65653451430802b86cfbea282ac891da",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P5",
+    "record_sha256": "5f1b132c35cf2d1b0514018c6ddba03a27563bc4fa12cdd1ad62b0c257d27bb1",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P1",
+    "record_sha256": "b1098e1e387be996ea5f7b685c759d8e2dd2309c0811defd946aaf4975943e72",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "v_P4"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P2",
+    "record_sha256": "8be73a7f7784160af8a0faa78cf084ce143d3a91e93535683b34516ed3e66621",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "v_P4"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P3",
+    "record_sha256": "68349d179b6ca3e78451bf4a62623ccd7b512c4478bc3e31b2a8867d605eaed0",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "v_P4"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P5",
+    "record_sha256": "947bbd3b92be65711bc75cd18a6a7910b2ff7b24be690ad89a7d101a943242a3",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "v_P4"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P4",
+    "record_sha256": "2bc1fc7773ed1f439e16d9c9b56d2ba161b9fb5defd660f9e6414ed5f5de6466",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "v_P3"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD11-P1",
+    "record_sha256": "4562555822d9878c4a56d9455ab7c9987b05406d8cbc549cc4498dd6360e48a0",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD11-P4",
+    "record_sha256": "c9da0fafd1a1ecab1234ffded8e1584ce84f41c9e944b83ee9201c53b975ad5c",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD11-P2",
+    "record_sha256": "7bc58c3d03283f31b1769b2a1b0ba36bb08df89e6c5fb532aae1937929890296",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD11-P3",
+    "record_sha256": "d8275e333d2cfb625a24ec774814675f2f9552fca4c5feb30a291bc386f55b3a",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD11-P5",
+    "record_sha256": "8a9b8a2a34e1cb8b895bdc9ac2d32de022b55b95300bc82cc4ba82ace49716f8",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P1",
+    "record_sha256": "e8be44e1165a9fdc53e8f6b62f8c0ecccff70af99d5e88d6b3ff359f5da61d82",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    },
+    "limit": 5,
+    "descending": false
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P2",
+    "record_sha256": "5cc1236e7e5c63b9c786fc52649ea1e917fb53e11a98551250028187f2da4541",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    },
+    "limit": 5,
+    "descending": false
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P3",
+    "record_sha256": "37fbd6a0d6b70d5706674a319e57fdc611bd313623be7049141f08fe15f1ec85",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    },
+    "limit": 5,
+    "descending": false
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P5",
+    "record_sha256": "fe6f620435ee444e1351b5a082ec0ca4664ff2e67fb65847ec0daa37e09b2e9e",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    },
+    "limit": 5,
+    "descending": false
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P4",
+    "record_sha256": "a260eed381c4c90ef12d9e1cc9ae3ac003d3b559989b3ca7492b5e8140c824e6",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    },
+    "limit": 5,
+    "descending": false
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P1",
+    "record_sha256": "1b52d84cfee42edfc588ea82e9a6abf424228276b9b68f42bb7ca48e0d324215",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "n1",
+      "Device": "n3"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P2",
+    "record_sha256": "d286bd63cf427b5f6df44c1d8ec897e218b795ec48de2ec9827918dd23ea6741",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "n1",
+      "Device": "n3"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P3",
+    "record_sha256": "485b4bb19f714abfe6db305425ccf4ebc2c895b9c9acc5c5294135f57ea7e79f",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "n1",
+      "Device": "n3"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P4",
+    "record_sha256": "ec7caa1cb41cfd314b0eb9c7ab52dfe9948e8251d2528eabf3794d7f96adf206",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "n1",
+      "Device": "n3"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P5",
+    "record_sha256": "a948749dcac360436c445f18e51860c2b64dacda67dd020bf95a967bf1db6a6b",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "n1",
+      "Device": "n3"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P1",
+    "record_sha256": "b3ff1895c4f26eedfd4fa0ac5a3f6bfa861a80ed001f75edca037b64051553a5",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "v_P9"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P2",
+    "record_sha256": "29ac48d395ee5fc783c4d7adbd14fc3e2a42d29e6cb0520e9f593139e4ab00e7",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "v_P9"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P3",
+    "record_sha256": "c2489ae95e39b21620363a324dc1ac4edf9fd0979a8d743975f4424cfb020331",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "v_P9"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P4",
+    "record_sha256": "de1056198349d7a2e5bd63cca62015b06ae42a9525ab3b25fa69ae584ddb11d7",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "v_P9"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P5",
+    "record_sha256": "fdfc7800fa9ee09aaca42c14be3ea14a9e9c025186af3d61ef67e2e100df4e1b",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "v_P9"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P1",
+    "record_sha256": "0980bd1465dc49a24640d4cef15408cac867bf4b5e9f2c9fdb27095e0f791a54",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "v_P2"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P2",
+    "record_sha256": "ac1dc71b75a7845a322dee3a117593d43995190d4577be0fe2b12924caa8a20f",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "v_P2"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P3",
+    "record_sha256": "69cc3034d24b3467848a9e11356a9ae208bb52f222fc15ca7703fabfc280f193",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "v_P2"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P4",
+    "record_sha256": "df28c7dc0062378d41a01c71a1060ae57270670967b955c68ebf836358669e99",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "v_P2"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P5",
+    "record_sha256": "c1146b2038bc273e3894f8015e96b5bcd4a49df9eea70aa9400b8ffd0093f01b",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "v_P3"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "N43-P1",
+    "record_sha256": "054ad29d7a6de6c916061d2cc60793d0b694e807b7324f767835efc59597698e",
+    "reviewer": "AI-assisted preliminary structural review",
+    "decision": "reject",
+    "reason": "unregistered_mapping",
+    "evidence": "Explicit LocalId key; no approved mapping; zero model calls."
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "N43-P2",
+    "record_sha256": "09127a7199fd99bb3d4d55b8e55e286cc79c0ccd7f9c59d58de3c0b379a45ecd",
+    "reviewer": "AI-assisted preliminary structural review",
+    "decision": "reject",
+    "reason": "unregistered_mapping",
+    "evidence": "Explicit LocalId key; no approved mapping; zero model calls."
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "N43-P3",
+    "record_sha256": "55033c1a995ddbaccf53f9c4f472cb2be234be9354938f906a6e5f107208e5a3",
+    "reviewer": "AI-assisted preliminary structural review",
+    "decision": "reject",
+    "reason": "unregistered_mapping",
+    "evidence": "Explicit LocalId key; no approved mapping; zero model calls."
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "N43-P4",
+    "record_sha256": "3dd9c63d17982ed02ca6c27237c30a2df04b8b0369211b7b264fb2a291d79800",
+    "reviewer": "AI-assisted preliminary structural review",
+    "decision": "reject",
+    "reason": "unregistered_mapping",
+    "evidence": "Explicit LocalId key; no approved mapping; zero model calls."
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "N43-P5",
+    "record_sha256": "051cc12ce2d5a6cb5cc2a9fd1cb9c680d51581b6fb840ba32054ddce47a77419",
+    "reviewer": "AI-assisted preliminary structural review",
+    "decision": "reject",
+    "reason": "unregistered_mapping",
+    "evidence": "Explicit LocalId key; no approved mapping; zero model calls."
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P1",
+    "record_sha256": "73acf514c38e7f12c54f21f0dfe00432343e04e4140ffe4bc9d44974fc14bb99",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P5",
+    "record_sha256": "f008eb98abcb71cd3a6d2c263b977ca802f846ba3e7ca2f3abdc3365005917d4",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P2",
+    "record_sha256": "df2b0832b096d2f6218c081c89276a73f10456e0281edd6664fc8da29b0f4b86",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P3",
+    "record_sha256": "348da4f8a70ae3f92fa92cf5f083dd5b413c1a26e0d3cdc4319bc2a0deacf5b0",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "ablated",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P4",
+    "record_sha256": "1be63f9d933f7824333362795f1f97446fa914067559a2b47ebf856e7809d20a",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P1",
+    "record_sha256": "c6f4d00ca74962f8211774db00554468aa3ea24f82fc7ab04728a50d3b3bc728",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P2",
+    "record_sha256": "75466f34150eec75ead5d4f9babfcf4ee7122728fe42d4f5eb51df9681b3419c",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P3",
+    "record_sha256": "d8e612d279f77d3badb237da47ac0e0b0f0142c69732d02f698c0f57abc7c9cc",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P4",
+    "record_sha256": "9c0ed3fea0924d6b9225c59ddab3d65b4dcdd20777e68fc73e3f616409aa8177",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD01-P5",
+    "record_sha256": "e3ab964087579b10678797df08bbb2fca101d01dac6d15252c5d0fd83907e3af",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P1",
+    "record_sha256": "8f5978292756098e9d6a2788f983feeeb4aaa376d3edba8b0d22e17481901f01",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "v_P4"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P2",
+    "record_sha256": "39fbb1b74c4b1293ef654bee5fbe406eab09863d4b63bcf49aa8f16315d18284",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "v_P4"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P3",
+    "record_sha256": "0346334d5fb996d903d3ee161ebaa04cdaa84c8478fcab0bfad193b51ce3a622",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "v_P4"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P5",
+    "record_sha256": "9c8ba8bc21d7f72f2284d3bda14a600efc220f2b17fb858845f579b48408c22c",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "v_P4"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD05-P4",
+    "record_sha256": "fafe90c98a60ea0cd86f0e35c72e1c923c5b1ccd53c42c0ff49034c2d14c3559",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.DeviceType": "v_P3"
+    },
+    "reference_alignment": {
+      "Device.DeviceType": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD11-P1",
+    "record_sha256": "7cc118d3b96a28d9b7d9ca7d11d1dc1b093ed3efde6c2fdef39a5ec69f67825d",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD11-P4",
+    "record_sha256": "47982237ac1fbbc3e0d42343db9b75964d5f1746cd923a424bb0296772a804a3",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD11-P2",
+    "record_sha256": "b444484cc304fd2b4376bd3e349158a3dea3ffad37544bfc24a3a57ab698fc82",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD11-P3",
+    "record_sha256": "50f19c47cf6b8c9200046ff70d669ec413db6dd2844e407bc3137833903b3253",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD11-P5",
+    "record_sha256": "acd74bfb08928be450e5f1d046a78cb3586aec79259ffdac5313abb244d32e60",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P1",
+    "record_sha256": "8cf06d6b8ff48aae89dbb8c6d5a50ee46f9e9c98183721bb51e526b9ad0134e4",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    },
+    "limit": 5,
+    "descending": false
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P2",
+    "record_sha256": "3af90690d90bb924694b7f9377edddcf061e0bea16cb2b1582c561f3a4980ac3",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    },
+    "limit": 5,
+    "descending": false
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P3",
+    "record_sha256": "2ca0213d8ca1b1d4fabdfce73924824966252ae23b0f24e657d3ce702e7e8811",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    },
+    "limit": 5,
+    "descending": false
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "SD13-P4",
+    "record_sha256": "e0a9b3ce75f34034200eb1123627ee4c7b6d2440f97ec61062a1d954cf097d44",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    },
+    "limit": 5,
+    "descending": false
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P1",
+    "record_sha256": "41dd502a3156103af0cdc0543bebb7d4cb4efe0b44de5dbf7ee37ed89a94b59c",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "n1",
+      "Device": "n3"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P2",
+    "record_sha256": "c0a7ec159fa98b1f3b65377f8bc4c4a3d2abd0fbb70fb7f22322b5059dc4d4b5",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "n1",
+      "Device": "n3"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P3",
+    "record_sha256": "78c86530d24133f401039c94f9bee5941e891714093e67e16e42b10b816f622e",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "n1",
+      "Device": "n3"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P4",
+    "record_sha256": "10af1b0824936df4e6abee50861ed0612f4bbe34d2f696cfce9c7a92e666c202",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "n1",
+      "Device": "n3"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "CD08-P5",
+    "record_sha256": "d98bc622ec4c334f7eab5ffac054848fbb33249caabddbb277d08b2112a366f7",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "InstrumentationFunction": "n1",
+      "Device": "n3"
+    },
+    "reference_alignment": {
+      "InstrumentationFunction": "left",
+      "Device": "right"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P1",
+    "record_sha256": "cebd7257b263677ce7a1f8fcc7ab312a360dc6090f2117d194678201574744f2",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "v_P9"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P2",
+    "record_sha256": "1453b957617b42438eb2df07aab9ad2cf90c41418410924f15a86c9e4931130e",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "v_P9"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P3",
+    "record_sha256": "39e39507f5970015e2b9a2612bcedcf1c36aa874e64d07beba40d68bff6b28fb",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "v_P9"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P4",
+    "record_sha256": "0a72f3dbca24179417ac1ad0fa3eac4d11f1738f06cee3fe0d17134313442a03",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "v_P9"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H01-P5",
+    "record_sha256": "34e149b544c55954cbcd79a4477f485d6428655dab15e0add8106b8517724f72",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device.EndPoint.LocalId": "v_P9"
+    },
+    "reference_alignment": {
+      "Device.EndPoint.LocalId": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P1",
+    "record_sha256": "c67f1b31f46f346e00042b61f57d6b3c5c143a7054cf5e002c15e550de5711b5",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "v_P2"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P2",
+    "record_sha256": "2605fd050fc04408d6477816a3bdce22c68122b078d4341153b1e90b5423b39d",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "v_P2"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P3",
+    "record_sha256": "990082cec6bf86b31ca46cba32550c66df6728f08cf0329d547c636462533498",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "v_P2"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P4",
+    "record_sha256": "f166aa1ee2c98ad2dcfe4f5fe840acbd5b98f5de46a3eb320e105410f7b28cf5",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "v_P2"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "H07-P5",
+    "record_sha256": "7d540432477c0827463794af48ccf112fd9eb71db3fe95f3ba5677ee3a76e4d6",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "AssemblyRecord.Revision": "v_P3"
+    },
+    "reference_alignment": {
+      "AssemblyRecord.Revision": "value"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "N43-P1",
+    "record_sha256": "cfac9c08b36213b94e4b87d6e797ed90b656174ad84ae5ade149818043bdc8ca",
+    "reviewer": "AI-assisted preliminary structural review",
+    "decision": "reject",
+    "reason": "unregistered_mapping",
+    "evidence": "Explicit LocalId key; no approved mapping; zero model calls."
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "N43-P2",
+    "record_sha256": "607c6683adf644261ce2e1b56ffb4a02e01ff0b37e60bad0751de88387b7e559",
+    "reviewer": "AI-assisted preliminary structural review",
+    "decision": "reject",
+    "reason": "unregistered_mapping",
+    "evidence": "Explicit LocalId key; no approved mapping; zero model calls."
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "N43-P3",
+    "record_sha256": "53af1fdf05eef76563a0057b27519b39a18a16c1c9e57ba75eb54696d7d40d37",
+    "reviewer": "AI-assisted preliminary structural review",
+    "decision": "reject",
+    "reason": "unregistered_mapping",
+    "evidence": "Explicit LocalId key; no approved mapping; zero model calls."
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "N43-P4",
+    "record_sha256": "7af4be92e9804e68a5afcd5e7d0848d9c88196c491e035cddb89b5247c6c29a0",
+    "reviewer": "AI-assisted preliminary structural review",
+    "decision": "reject",
+    "reason": "unregistered_mapping",
+    "evidence": "Explicit LocalId key; no approved mapping; zero model calls."
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "N43-P5",
+    "record_sha256": "a0b64615d61115ea04502ca1bcda60901847a7b9c5686f196c4f9a7ab425f5fe",
+    "reviewer": "AI-assisted preliminary structural review",
+    "decision": "reject",
+    "reason": "unregistered_mapping",
+    "evidence": "Explicit LocalId key; no approved mapping; zero model calls."
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P1",
+    "record_sha256": "268a983d67bd8e98dbad956508a4dc51c46762b097117dfb825c48df8d908ce5",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P5",
+    "record_sha256": "180fb3eeb37a5812e0e80439b94ec7e025d302e3ef48dd809824b872b61734f5",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P2",
+    "record_sha256": "8150bc2f3e08b23ec4a85ce8cb4df738c2877a25c9441c6038a08c35acf0e0ee",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P3",
+    "record_sha256": "568404103af3a8346dd837d71d07c73648d7a644a1cb7bd850e60e1a2431ee59",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  },
+  {
+    "method": "full",
+    "model": "qwen2.5-coder:7b",
+    "query_id": "E45-P4",
+    "record_sha256": "bbbe906e5b4c74a0ccf8eaca8bd23582f0ad4e806ff970f2cc2299e571feb20d",
+    "reviewer": "AI-assisted preliminary structural review",
+    "structural_correctness": true,
+    "evidence": "Inspected concept, owner path or class constraint, projected variables and applicable filters/join/order. Dataset-scoped assessment; missing explicit named graph is a limitation, not a structural failure under this review policy.",
+    "actual_alignment": {
+      "Device": "n1"
+    },
+    "reference_alignment": {
+      "Device": "entity"
+    }
+  }
+]
