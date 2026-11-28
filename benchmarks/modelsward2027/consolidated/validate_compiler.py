@@ -40,7 +40,9 @@ def main():
             matches=[]
             def walk(nodes,edges):
                 if len(nodes)>6: return
-                if len(nodes)>=len(parts)-1 and all(ns+c in classes.get(n,set()) for c,n in zip(parts[:-1],nodes[-(len(parts)-1):])):
+                # Child class constraints belong to incoming property shapes, not NodeShapes.
+                tail=edges[-(len(parts)-1):]
+                if len(tail)==len(parts)-1 and all(ns+c in classes.get(e['property_shape'],set()) for c,e in zip(parts[:-1],tail)):
                     for prop in ix.properties.get(nodes[-1],[]):
                         if prop['predicate']==ns+'has'+parts[-1]:
                             matches.append((nodes,edges,prop))
