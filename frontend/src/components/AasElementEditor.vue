@@ -4,7 +4,7 @@ import { ShieldCheck, Send, RefreshCw } from 'lucide-vue-next'
 
 type AasElement = { modelType: string; idShort: string; valueType?: string; value?: unknown; [key: string]: unknown }
 type AasDocument = { id: string; idShort: string; submodelElements?: AasElement[] }
-type GovernanceState = { version: number; documents: AasDocument[] }
+type GovernanceState = { version: number; documents: AasDocument[]; templates: Record<string,AasDocument> }
 type ChangeResult = { message_id: string; decision: 'ACCEPTED'|'REJECTED'|'DEFERRED'; committed: boolean; repository_version: number; triggered_policies: string[]; evaluated_contracts: {contract_id:string;verdict:string}[] }
 
 const props = defineProps<{
@@ -64,9 +64,21 @@ async function refresh(clearResult = true){
     if(!document)throw new Error('The selected engineering Submodel is not registered with SELiRA')
     const record=findRecord(document)
     if(!record)throw new Error('Could not resolve this Explorer record to a unique native AAS element. No change was submitted.')
+    const template=payload.templates?.[document.id]
+    if(!template)throw new Error('The registered Submodel template is unavailable; editing is disabled.')
+    const templatePrefix=rootCollection.value+'.'+(props.domain==='assetinventory'?'Asset':'Product')+'.'
+    const allowed=new Map(propertyMap(template.submodelElements||[],'')
+      .filter(item=>item.path.startsWith(templatePrefix))
+      .map(item=>[item.path.slice(templatePrefix.length),item.element]))
     collectionPath.value=rootCollection.value+'.'+record.idShort
     elements.value=propertyMap((record.value||[]) as AasElement[],collectionPath.value)
-    if(!elements.value.length)throw new Error('No supported AAS Property elements were found for this record')
+      .filter(item=>{
+        const relative=item.path.slice(collectionPath.value.length+1)
+        const definition=allowed.get(relative)
+        return definition?.modelType==='Property' && item.element.modelType==='Property'
+          && definition.valueType===item.element.valueType
+      })
+    if(!elements.value.length)throw new Error('No existing Property elements conforming to the registered AAS template were found for this record')
     selectedPath.value=elements.value[0].path
     editedValue.value=String(elements.value[0].element.value??'')
   }catch(e){error.value=e instanceof Error?e.message:String(e)}
