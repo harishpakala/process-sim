@@ -78,7 +78,7 @@ def build_service(endpoint, journal, *, mode, evidence_file, remote_quiescent=Fa
         try:
             with os.fdopen(fd, "w", encoding="utf-8") as stream:
                 json.dump(updated, stream, indent=2)
-                stream.write("\\n")
+                stream.write("\n")
                 stream.flush()
                 os.fsync(stream.fileno())
             os.replace(temporary, target)
