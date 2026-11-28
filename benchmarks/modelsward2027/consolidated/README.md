@@ -1,0 +1,3 @@
+# Consolidated engineering benchmark candidate
+
+Source revision: 35c642c2b42e323a9f0e475f6788d6160cbb32ad. All 225 in-scope historical queries and their scenario objects retained verbatim; N44 archived separately per read-only scope. Ten new scenarios (50 queries) use the same five retrieval verbs, explicit domain, owner and property labels, and existing named graphs. H01–H04 are ECAD development-exposed; H05–H10 extend owner discrimination. Expected nonempty results for new cases are hypotheses pending live reference validation. Engineering BOM domain resolution and planner support are not assumed. No synthetic data or production changes. Original runner is not yet adapted to this directory. Independent review and new reference snapshot required before evaluation.

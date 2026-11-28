@@ -1,0 +1,528 @@
+{
+  "status": "pending_live_validation",
+  "source_hashes": {
+    "dtwise-schema-index.json": "70068d60f1cac29260ce5a22dfe5e88a4035eb27ba2d32488e8530f05b89eb6b",
+    "cross-domain-mappings.json": "7f196943d0d2d8db00e1198865b5dafea915e5cca1fbd99f5c7603afe309038e"
+  },
+  "references": [
+    {
+      "reference_query_id": "REF-SD01",
+      "scenario_id": "SD01",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> .  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD02",
+      "scenario_id": "SD02",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?entity a <https://example.org/dexpi/Equipment> .  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Equipment"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD03",
+      "scenario_id": "SD03",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?entity a <https://example.org/dexpi/InstrumentationFunction> .  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "InstrumentationFunction"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD04",
+      "scenario_id": "SD04",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> . ?entity <https://example.org/ecad/hasLocalId> ?value .  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device.LocalId"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD05",
+      "scenario_id": "SD05",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> . ?entity <https://example.org/ecad/hasDeviceType> ?value .  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device.DeviceType"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD06",
+      "scenario_id": "SD06",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?entity a <https://example.org/dexpi/Equipment> . ?entity <https://example.org/dexpi/hasLocalId> ?value .  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Equipment.LocalId"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD07",
+      "scenario_id": "SD07",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> . ?entity <https://example.org/ecad/hasDeviceType> \"Pressure\" . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD08",
+      "scenario_id": "SD08",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> . ?entity <https://example.org/ecad/hasLocalId> \"PI-1301\" . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD09",
+      "scenario_id": "SD09",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?entity a <https://example.org/dexpi/Equipment> . ?entity <https://example.org/dexpi/hasLocalId> \"R-001\" . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Equipment"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD10",
+      "scenario_id": "SD10",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> . ?entity <https://example.org/ecad/hasDeviceType> \"Pressure\" . ?entity <https://example.org/ecad/hasLocalId> \"PI-1301\" . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD11",
+      "scenario_id": "SD11",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> .  { ?entity <https://example.org/ecad/hasDeviceType> \"Pressure\" . } UNION { ?entity <https://example.org/ecad/hasLocalId> \"PI-1301\" . }  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD12",
+      "scenario_id": "SD12",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?entity a <https://example.org/dexpi/Equipment> .  { ?entity <https://example.org/dexpi/hasLocalId> \"R-001\" . } UNION { ?entity <https://example.org/dexpi/hasLocalId> \"K-001\" . }  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Equipment"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD13",
+      "scenario_id": "SD13",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> .  ?entity <https://example.org/ecad/hasLocalId> ?sort . } } ORDER BY ASC(?sort) LIMIT 5",
+      "expected_empty": false,
+      "ordered": true,
+      "projection_roles": [
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD14",
+      "scenario_id": "SD14",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?entity a <https://example.org/dexpi/Equipment> .  ?entity <https://example.org/dexpi/hasLocalId> ?sort . } } ORDER BY DESC(?sort) LIMIT 3",
+      "expected_empty": false,
+      "ordered": true,
+      "projection_roles": [
+        "Equipment"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD15",
+      "scenario_id": "SD15",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/> { ?entity a <https://example.org/assetinventory/Asset> .  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Asset"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD16",
+      "scenario_id": "SD16",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/> { ?entity a <https://example.org/assetinventory/Asset> . ?entity <https://example.org/assetinventory/hasAssetType> \"SimulatedEquipment\" . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Asset"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD17",
+      "scenario_id": "SD17",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/> { ?entity a <https://example.org/productcatalog/Product> . ?entity <https://example.org/productcatalog/hasManufacturerName> ?value .  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Product.ManufacturerName"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD18",
+      "scenario_id": "SD18",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/> { ?entity a <https://example.org/productcatalog/Product> . ?entity <https://example.org/productcatalog/hasManufacturerName> \"ABB\" . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Product"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD19",
+      "scenario_id": "SD19",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/> { ?entity a <https://example.org/opcuaconnectivity/SignalMapping> . ?entity <https://example.org/opcuaconnectivity/hasSignalName> ?value .  } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "SignalMapping.SignalName"
+      ]
+    },
+    {
+      "reference_query_id": "REF-SD20",
+      "scenario_id": "SD20",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/> { ?entity a <https://example.org/opcuaconnectivity/SignalMapping> . ?entity <https://example.org/opcuaconnectivity/hasSignalName> \"XMEAS7\" . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "SignalMapping"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD01",
+      "scenario_id": "CD01",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/> { ?left a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?right a <https://example.org/dexpi/ActuatingFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Asset",
+        "ActuatingFunction"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD02",
+      "scenario_id": "CD02",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/> { ?left a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?right a <https://example.org/dexpi/Equipment> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Asset",
+        "Equipment"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD03",
+      "scenario_id": "CD03",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/> { ?left a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?right a <https://example.org/dexpi/InstrumentationFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Asset",
+        "InstrumentationFunction"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD04",
+      "scenario_id": "CD04",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/> { ?left a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Asset",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD05",
+      "scenario_id": "CD05",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/> { ?left a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/> { ?right a <https://example.org/opcuaconnectivity/SignalMapping> ; <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Asset",
+        "SignalMapping"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD06",
+      "scenario_id": "CD06",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/> { ?left a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasProductIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/> { ?right a <https://example.org/productcatalog/Product> ; <https://example.org/productcatalog/hasProductIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Asset",
+        "Product"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD07",
+      "scenario_id": "CD07",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/ActuatingFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "ActuatingFunction",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD08",
+      "scenario_id": "CD08",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/InstrumentationFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD09",
+      "scenario_id": "CD09",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/ActuatingFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/> { ?right a <https://example.org/opcuaconnectivity/SignalMapping> ; <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "ActuatingFunction",
+        "SignalMapping"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD10",
+      "scenario_id": "CD10",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/InstrumentationFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/> { ?right a <https://example.org/opcuaconnectivity/SignalMapping> ; <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "InstrumentationFunction",
+        "SignalMapping"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD11",
+      "scenario_id": "CD11",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?left a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/> { ?right a <https://example.org/opcuaconnectivity/SignalMapping> ; <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device",
+        "SignalMapping"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD12",
+      "scenario_id": "CD12",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/InstrumentationFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . ?right <https://example.org/ecad/hasDeviceType> \"Pressure\" . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD13",
+      "scenario_id": "CD13",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/InstrumentationFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . ?right <https://example.org/ecad/hasLocalId> \"PI-1301\" . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD14",
+      "scenario_id": "CD14",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/InstrumentationFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . ?right <https://example.org/ecad/hasDeviceType> \"Pressure\" . ?right <https://example.org/ecad/hasLocalId> \"PI-1301\" . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD15",
+      "scenario_id": "CD15",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/InstrumentationFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . ?right <https://example.org/ecad/hasLocalId> ?sort . } } ORDER BY ASC(?sort) LIMIT 5",
+      "expected_empty": false,
+      "ordered": true,
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD16",
+      "scenario_id": "CD16",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/InstrumentationFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . ?left <https://example.org/dexpi/hasLocalId> ?sort . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . } } ORDER BY DESC(?sort) LIMIT 5",
+      "expected_empty": false,
+      "ordered": true,
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD17",
+      "scenario_id": "CD17",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/ActuatingFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . ?right <https://example.org/ecad/hasLocalId> ?sort . } } ORDER BY ASC(?sort) LIMIT 5",
+      "expected_empty": false,
+      "ordered": true,
+      "projection_roles": [
+        "ActuatingFunction",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-CD18",
+      "scenario_id": "CD18",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/ActuatingFunction> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . ?left <https://example.org/dexpi/hasLocalId> ?sort . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . } } ORDER BY DESC(?sort) LIMIT 5",
+      "expected_empty": false,
+      "ordered": true,
+      "projection_roles": [
+        "ActuatingFunction",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-E45",
+      "scenario_id": "E45",
+      "sparql": "SELECT ?entity WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> . ?entity <https://example.org/ecad/hasLocalId> \"BENCHMARK_NONEXISTENT_001\" . } }",
+      "expected_empty": true,
+      "ordered": false,
+      "projection_roles": [
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-E46",
+      "scenario_id": "E46",
+      "sparql": "SELECT ?left ?right WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?left a <https://example.org/dexpi/Equipment> ; <https://example.org/dexpi/hasAssetIdentifier> ?key . } GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?right a <https://example.org/ecad/Device> ; <https://example.org/ecad/hasAssetIdentifier> ?key . } }",
+      "expected_empty": true,
+      "ordered": false,
+      "projection_roles": [
+        "Equipment",
+        "Device"
+      ]
+    },
+    {
+      "reference_query_id": "REF-H01",
+      "scenario_id": "H01",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> . ?entity <https://example.org/ecad/hasEndPoint> ?child . ?child a <https://example.org/ecad/EndPoint> . ?child <https://example.org/ecad/hasLocalId> ?value . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device.EndPoint.LocalId"
+      ]
+    },
+    {
+      "reference_query_id": "REF-H02",
+      "scenario_id": "H02",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> . ?entity <https://example.org/ecad/hasEndPoint> ?child . ?child a <https://example.org/ecad/EndPoint> . ?child <https://example.org/ecad/hasAddress> ?value . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device.EndPoint.Address"
+      ]
+    },
+    {
+      "reference_query_id": "REF-H03",
+      "scenario_id": "H03",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> . ?entity <https://example.org/ecad/hasPLCEndPoint> ?child . ?child a <https://example.org/ecad/PLCEndPoint> . ?child <https://example.org/ecad/hasLocalId> ?value . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device.PLCEndPoint.LocalId"
+      ]
+    },
+    {
+      "reference_query_id": "REF-H04",
+      "scenario_id": "H04",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> { ?entity a <https://example.org/ecad/Device> . ?entity <https://example.org/ecad/hasPLCEndPoint> ?child . ?child a <https://example.org/ecad/PLCEndPoint> . ?child <https://example.org/ecad/hasAddress> ?value . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "Device.PLCEndPoint.Address"
+      ]
+    },
+    {
+      "reference_query_id": "REF-H05",
+      "scenario_id": "H05",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?entity a <https://example.org/dexpi/ActuatingFunction> . ?entity <https://example.org/dexpi/hasLocalId> ?value . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "ActuatingFunction.LocalId"
+      ]
+    },
+    {
+      "reference_query_id": "REF-H06",
+      "scenario_id": "H06",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> { ?entity a <https://example.org/dexpi/InstrumentationFunction> . ?entity <https://example.org/dexpi/hasLocalId> ?value . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "InstrumentationFunction.LocalId"
+      ]
+    },
+    {
+      "reference_query_id": "REF-H07",
+      "scenario_id": "H07",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/> { ?entity a <https://example.org/engineeringbom/AssemblyRecord> . ?entity <https://example.org/engineeringbom/hasRevision> ?value . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "AssemblyRecord.Revision"
+      ]
+    },
+    {
+      "reference_query_id": "REF-H08",
+      "scenario_id": "H08",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/> { ?entity a <https://example.org/engineeringbom/BOMItemRecord> . ?entity <https://example.org/engineeringbom/hasRevision> ?value . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "BOMItemRecord.Revision"
+      ]
+    },
+    {
+      "reference_query_id": "REF-H09",
+      "scenario_id": "H09",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/> { ?entity a <https://example.org/engineeringbom/FunctionalAssociation> . ?entity <https://example.org/engineeringbom/hasSourceRecordId> ?value . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "FunctionalAssociation.SourceRecordId"
+      ]
+    },
+    {
+      "reference_query_id": "REF-H10",
+      "scenario_id": "H10",
+      "sparql": "SELECT ?value WHERE { GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/> { ?entity a <https://example.org/engineeringbom/ParentLink> . ?entity <https://example.org/engineeringbom/hasSourceRecordId> ?value . } }",
+      "expected_empty": false,
+      "ordered": false,
+      "projection_roles": [
+        "ParentLink.SourceRecordId"
+      ]
+    }
+  ]
+}

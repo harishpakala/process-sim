@@ -1,0 +1,2376 @@
+{
+  "benchmark_id": "modelsward2027_consolidated",
+  "status": "candidate_pending_live_validation",
+  "scenario_count": 55,
+  "query_count": 275,
+  "scenarios": [
+    {
+      "scenario_id": "SD01",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD01",
+      "paraphrases": [
+        {
+          "id": "SD01-P1",
+          "query": "Show ECAD Device entities."
+        },
+        {
+          "id": "SD01-P2",
+          "query": "List ECAD Device entities."
+        },
+        {
+          "id": "SD01-P3",
+          "query": "Retrieve ECAD Device entities."
+        },
+        {
+          "id": "SD01-P4",
+          "query": "Return ECAD Device entities."
+        },
+        {
+          "id": "SD01-P5",
+          "query": "Display ECAD Device entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD02",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD02",
+      "paraphrases": [
+        {
+          "id": "SD02-P1",
+          "query": "Show DEXPI Equipment entities."
+        },
+        {
+          "id": "SD02-P2",
+          "query": "List DEXPI Equipment entities."
+        },
+        {
+          "id": "SD02-P3",
+          "query": "Retrieve DEXPI Equipment entities."
+        },
+        {
+          "id": "SD02-P4",
+          "query": "Return DEXPI Equipment entities."
+        },
+        {
+          "id": "SD02-P5",
+          "query": "Display DEXPI Equipment entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD03",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "InstrumentationFunction"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD03",
+      "paraphrases": [
+        {
+          "id": "SD03-P1",
+          "query": "Show DEXPI InstrumentationFunction entities."
+        },
+        {
+          "id": "SD03-P2",
+          "query": "List DEXPI InstrumentationFunction entities."
+        },
+        {
+          "id": "SD03-P3",
+          "query": "Retrieve DEXPI InstrumentationFunction entities."
+        },
+        {
+          "id": "SD03-P4",
+          "query": "Return DEXPI InstrumentationFunction entities."
+        },
+        {
+          "id": "SD03-P5",
+          "query": "Display DEXPI InstrumentationFunction entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD04",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device.LocalId"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD04",
+      "paraphrases": [
+        {
+          "id": "SD04-P1",
+          "query": "Show LocalId values of ECAD Device entities."
+        },
+        {
+          "id": "SD04-P2",
+          "query": "List LocalId values of ECAD Device entities."
+        },
+        {
+          "id": "SD04-P3",
+          "query": "Retrieve LocalId values of ECAD Device entities."
+        },
+        {
+          "id": "SD04-P4",
+          "query": "Return LocalId values of ECAD Device entities."
+        },
+        {
+          "id": "SD04-P5",
+          "query": "Display LocalId values of ECAD Device entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD05",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device.DeviceType"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD05",
+      "paraphrases": [
+        {
+          "id": "SD05-P1",
+          "query": "Show DeviceType values of ECAD Device entities."
+        },
+        {
+          "id": "SD05-P2",
+          "query": "List DeviceType values of ECAD Device entities."
+        },
+        {
+          "id": "SD05-P3",
+          "query": "Retrieve DeviceType values of ECAD Device entities."
+        },
+        {
+          "id": "SD05-P4",
+          "query": "Return DeviceType values of ECAD Device entities."
+        },
+        {
+          "id": "SD05-P5",
+          "query": "Display DeviceType values of ECAD Device entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD06",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment.LocalId"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD06",
+      "paraphrases": [
+        {
+          "id": "SD06-P1",
+          "query": "Show LocalId values of DEXPI Equipment entities."
+        },
+        {
+          "id": "SD06-P2",
+          "query": "List LocalId values of DEXPI Equipment entities."
+        },
+        {
+          "id": "SD06-P3",
+          "query": "Retrieve LocalId values of DEXPI Equipment entities."
+        },
+        {
+          "id": "SD06-P4",
+          "query": "Return LocalId values of DEXPI Equipment entities."
+        },
+        {
+          "id": "SD06-P5",
+          "query": "Display LocalId values of DEXPI Equipment entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD07",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Pressure"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD07",
+      "paraphrases": [
+        {
+          "id": "SD07-P1",
+          "query": "Show ECAD Device entities where DeviceType is Pressure."
+        },
+        {
+          "id": "SD07-P2",
+          "query": "List ECAD Device entities where DeviceType is Pressure."
+        },
+        {
+          "id": "SD07-P3",
+          "query": "Retrieve ECAD Device entities where DeviceType is Pressure."
+        },
+        {
+          "id": "SD07-P4",
+          "query": "Return ECAD Device entities where DeviceType is Pressure."
+        },
+        {
+          "id": "SD07-P5",
+          "query": "Display ECAD Device entities where DeviceType is Pressure."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD08",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [
+          {
+            "property": "Device.LocalId",
+            "operator": "=",
+            "value": "PI-1301"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD08",
+      "paraphrases": [
+        {
+          "id": "SD08-P1",
+          "query": "Show ECAD Device entities where LocalId is PI-1301."
+        },
+        {
+          "id": "SD08-P2",
+          "query": "List ECAD Device entities where LocalId is PI-1301."
+        },
+        {
+          "id": "SD08-P3",
+          "query": "Retrieve ECAD Device entities where LocalId is PI-1301."
+        },
+        {
+          "id": "SD08-P4",
+          "query": "Return ECAD Device entities where LocalId is PI-1301."
+        },
+        {
+          "id": "SD08-P5",
+          "query": "Display ECAD Device entities where LocalId is PI-1301."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD09",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment"
+        ],
+        "filters": [
+          {
+            "property": "Equipment.LocalId",
+            "operator": "=",
+            "value": "R-001"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD09",
+      "paraphrases": [
+        {
+          "id": "SD09-P1",
+          "query": "Show DEXPI Equipment entities where LocalId is R-001."
+        },
+        {
+          "id": "SD09-P2",
+          "query": "List DEXPI Equipment entities where LocalId is R-001."
+        },
+        {
+          "id": "SD09-P3",
+          "query": "Retrieve DEXPI Equipment entities where LocalId is R-001."
+        },
+        {
+          "id": "SD09-P4",
+          "query": "Return DEXPI Equipment entities where LocalId is R-001."
+        },
+        {
+          "id": "SD09-P5",
+          "query": "Display DEXPI Equipment entities where LocalId is R-001."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD10",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Pressure"
+          },
+          {
+            "property": "Device.LocalId",
+            "operator": "=",
+            "value": "PI-1301"
+          }
+        ],
+        "boolean_operator": "AND",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD10",
+      "paraphrases": [
+        {
+          "id": "SD10-P1",
+          "query": "Show ECAD Device entities where DeviceType is Pressure AND LocalId is PI-1301."
+        },
+        {
+          "id": "SD10-P2",
+          "query": "List ECAD Device entities where DeviceType is Pressure AND LocalId is PI-1301."
+        },
+        {
+          "id": "SD10-P3",
+          "query": "Retrieve ECAD Device entities where DeviceType is Pressure AND LocalId is PI-1301."
+        },
+        {
+          "id": "SD10-P4",
+          "query": "Return ECAD Device entities where DeviceType is Pressure AND LocalId is PI-1301."
+        },
+        {
+          "id": "SD10-P5",
+          "query": "Display ECAD Device entities where DeviceType is Pressure AND LocalId is PI-1301."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD11",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Pressure"
+          },
+          {
+            "property": "Device.LocalId",
+            "operator": "=",
+            "value": "PI-1301"
+          }
+        ],
+        "boolean_operator": "OR",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD11",
+      "paraphrases": [
+        {
+          "id": "SD11-P1",
+          "query": "Show ECAD Device entities where DeviceType is Pressure OR LocalId is PI-1301."
+        },
+        {
+          "id": "SD11-P2",
+          "query": "List ECAD Device entities where DeviceType is Pressure OR LocalId is PI-1301."
+        },
+        {
+          "id": "SD11-P3",
+          "query": "Retrieve ECAD Device entities where DeviceType is Pressure OR LocalId is PI-1301."
+        },
+        {
+          "id": "SD11-P4",
+          "query": "Return ECAD Device entities where DeviceType is Pressure OR LocalId is PI-1301."
+        },
+        {
+          "id": "SD11-P5",
+          "query": "Display ECAD Device entities where DeviceType is Pressure OR LocalId is PI-1301."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD12",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment"
+        ],
+        "filters": [
+          {
+            "property": "Equipment.LocalId",
+            "operator": "=",
+            "value": "R-001"
+          },
+          {
+            "property": "Equipment.LocalId",
+            "operator": "=",
+            "value": "K-001"
+          }
+        ],
+        "boolean_operator": "OR",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD12",
+      "paraphrases": [
+        {
+          "id": "SD12-P1",
+          "query": "Show DEXPI Equipment entities where LocalId is R-001 OR LocalId is K-001."
+        },
+        {
+          "id": "SD12-P2",
+          "query": "List DEXPI Equipment entities where LocalId is R-001 OR LocalId is K-001."
+        },
+        {
+          "id": "SD12-P3",
+          "query": "Retrieve DEXPI Equipment entities where LocalId is R-001 OR LocalId is K-001."
+        },
+        {
+          "id": "SD12-P4",
+          "query": "Return DEXPI Equipment entities where LocalId is R-001 OR LocalId is K-001."
+        },
+        {
+          "id": "SD12-P5",
+          "query": "Display DEXPI Equipment entities where LocalId is R-001 OR LocalId is K-001."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD13",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": [
+          "LocalId",
+          "ASC"
+        ],
+        "limit": 5
+      },
+      "reference_query_id": "REF-SD13",
+      "paraphrases": [
+        {
+          "id": "SD13-P1",
+          "query": "Show ECAD Device entities ordered by LocalId ascending, limited to 5."
+        },
+        {
+          "id": "SD13-P2",
+          "query": "List ECAD Device entities ordered by LocalId ascending, limited to 5."
+        },
+        {
+          "id": "SD13-P3",
+          "query": "Retrieve ECAD Device entities ordered by LocalId ascending, limited to 5."
+        },
+        {
+          "id": "SD13-P4",
+          "query": "Return ECAD Device entities ordered by LocalId ascending, limited to 5."
+        },
+        {
+          "id": "SD13-P5",
+          "query": "Display ECAD Device entities ordered by LocalId ascending, limited to 5."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD14",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": [
+          "LocalId",
+          "DESC"
+        ],
+        "limit": 3
+      },
+      "reference_query_id": "REF-SD14",
+      "paraphrases": [
+        {
+          "id": "SD14-P1",
+          "query": "Show DEXPI Equipment entities ordered by LocalId descending, limited to 3."
+        },
+        {
+          "id": "SD14-P2",
+          "query": "List DEXPI Equipment entities ordered by LocalId descending, limited to 3."
+        },
+        {
+          "id": "SD14-P3",
+          "query": "Retrieve DEXPI Equipment entities ordered by LocalId descending, limited to 3."
+        },
+        {
+          "id": "SD14-P4",
+          "query": "Return DEXPI Equipment entities ordered by LocalId descending, limited to 3."
+        },
+        {
+          "id": "SD14-P5",
+          "query": "Display DEXPI Equipment entities ordered by LocalId descending, limited to 3."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD15",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "assetinventory"
+        ],
+        "projections": [
+          "Asset"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD15",
+      "paraphrases": [
+        {
+          "id": "SD15-P1",
+          "query": "Show Asset Inventory Asset entities."
+        },
+        {
+          "id": "SD15-P2",
+          "query": "List Asset Inventory Asset entities."
+        },
+        {
+          "id": "SD15-P3",
+          "query": "Retrieve Asset Inventory Asset entities."
+        },
+        {
+          "id": "SD15-P4",
+          "query": "Return Asset Inventory Asset entities."
+        },
+        {
+          "id": "SD15-P5",
+          "query": "Display Asset Inventory Asset entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD16",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "assetinventory"
+        ],
+        "projections": [
+          "Asset"
+        ],
+        "filters": [
+          {
+            "property": "Asset.AssetType",
+            "operator": "=",
+            "value": "SimulatedEquipment"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD16",
+      "paraphrases": [
+        {
+          "id": "SD16-P1",
+          "query": "Show Asset Inventory Asset entities where AssetType is SimulatedEquipment."
+        },
+        {
+          "id": "SD16-P2",
+          "query": "List Asset Inventory Asset entities where AssetType is SimulatedEquipment."
+        },
+        {
+          "id": "SD16-P3",
+          "query": "Retrieve Asset Inventory Asset entities where AssetType is SimulatedEquipment."
+        },
+        {
+          "id": "SD16-P4",
+          "query": "Return Asset Inventory Asset entities where AssetType is SimulatedEquipment."
+        },
+        {
+          "id": "SD16-P5",
+          "query": "Display Asset Inventory Asset entities where AssetType is SimulatedEquipment."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD17",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "productcatalog"
+        ],
+        "projections": [
+          "Product.ManufacturerName"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD17",
+      "paraphrases": [
+        {
+          "id": "SD17-P1",
+          "query": "Show ManufacturerName values of Product Catalog Product entities."
+        },
+        {
+          "id": "SD17-P2",
+          "query": "List ManufacturerName values of Product Catalog Product entities."
+        },
+        {
+          "id": "SD17-P3",
+          "query": "Retrieve ManufacturerName values of Product Catalog Product entities."
+        },
+        {
+          "id": "SD17-P4",
+          "query": "Return ManufacturerName values of Product Catalog Product entities."
+        },
+        {
+          "id": "SD17-P5",
+          "query": "Display ManufacturerName values of Product Catalog Product entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD18",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "productcatalog"
+        ],
+        "projections": [
+          "Product"
+        ],
+        "filters": [
+          {
+            "property": "Product.ManufacturerName",
+            "operator": "=",
+            "value": "ABB"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD18",
+      "paraphrases": [
+        {
+          "id": "SD18-P1",
+          "query": "Show Product Catalog Product entities where ManufacturerName is ABB."
+        },
+        {
+          "id": "SD18-P2",
+          "query": "List Product Catalog Product entities where ManufacturerName is ABB."
+        },
+        {
+          "id": "SD18-P3",
+          "query": "Retrieve Product Catalog Product entities where ManufacturerName is ABB."
+        },
+        {
+          "id": "SD18-P4",
+          "query": "Return Product Catalog Product entities where ManufacturerName is ABB."
+        },
+        {
+          "id": "SD18-P5",
+          "query": "Display Product Catalog Product entities where ManufacturerName is ABB."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD19",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "opcuaconnectivity"
+        ],
+        "projections": [
+          "SignalMapping.SignalName"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD19",
+      "paraphrases": [
+        {
+          "id": "SD19-P1",
+          "query": "Show SignalName values of OPC UA Connectivity SignalMapping entities."
+        },
+        {
+          "id": "SD19-P2",
+          "query": "List SignalName values of OPC UA Connectivity SignalMapping entities."
+        },
+        {
+          "id": "SD19-P3",
+          "query": "Retrieve SignalName values of OPC UA Connectivity SignalMapping entities."
+        },
+        {
+          "id": "SD19-P4",
+          "query": "Return SignalName values of OPC UA Connectivity SignalMapping entities."
+        },
+        {
+          "id": "SD19-P5",
+          "query": "Display SignalName values of OPC UA Connectivity SignalMapping entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "SD20",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "opcuaconnectivity"
+        ],
+        "projections": [
+          "SignalMapping"
+        ],
+        "filters": [
+          {
+            "property": "SignalMapping.SignalName",
+            "operator": "=",
+            "value": "XMEAS7"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-SD20",
+      "paraphrases": [
+        {
+          "id": "SD20-P1",
+          "query": "Show OPC UA Connectivity SignalMapping entities where SignalName is XMEAS7."
+        },
+        {
+          "id": "SD20-P2",
+          "query": "List OPC UA Connectivity SignalMapping entities where SignalName is XMEAS7."
+        },
+        {
+          "id": "SD20-P3",
+          "query": "Retrieve OPC UA Connectivity SignalMapping entities where SignalName is XMEAS7."
+        },
+        {
+          "id": "SD20-P4",
+          "query": "Return OPC UA Connectivity SignalMapping entities where SignalName is XMEAS7."
+        },
+        {
+          "id": "SD20-P5",
+          "query": "Display OPC UA Connectivity SignalMapping entities where SignalName is XMEAS7."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD01",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "assetinventory",
+          "dexpi"
+        ],
+        "projections": [
+          "Asset",
+          "ActuatingFunction"
+        ],
+        "mapping_id": "assetinventory-dexpi-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD01",
+      "paraphrases": [
+        {
+          "id": "CD01-P1",
+          "query": "Show Asset Inventory Asset entities and matching DEXPI ActuatingFunction entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD01-P2",
+          "query": "List Asset Inventory Asset entities and matching DEXPI ActuatingFunction entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD01-P3",
+          "query": "Retrieve Asset Inventory Asset entities and matching DEXPI ActuatingFunction entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD01-P4",
+          "query": "Return Asset Inventory Asset entities and matching DEXPI ActuatingFunction entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD01-P5",
+          "query": "Display Asset Inventory Asset entities and matching DEXPI ActuatingFunction entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD02",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "assetinventory",
+          "dexpi"
+        ],
+        "projections": [
+          "Asset",
+          "Equipment"
+        ],
+        "mapping_id": "assetinventory-dexpi-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD02",
+      "paraphrases": [
+        {
+          "id": "CD02-P1",
+          "query": "Show Asset Inventory Asset entities and matching DEXPI Equipment entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD02-P2",
+          "query": "List Asset Inventory Asset entities and matching DEXPI Equipment entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD02-P3",
+          "query": "Retrieve Asset Inventory Asset entities and matching DEXPI Equipment entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD02-P4",
+          "query": "Return Asset Inventory Asset entities and matching DEXPI Equipment entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD02-P5",
+          "query": "Display Asset Inventory Asset entities and matching DEXPI Equipment entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD03",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "assetinventory",
+          "dexpi"
+        ],
+        "projections": [
+          "Asset",
+          "InstrumentationFunction"
+        ],
+        "mapping_id": "assetinventory-dexpi-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD03",
+      "paraphrases": [
+        {
+          "id": "CD03-P1",
+          "query": "Show Asset Inventory Asset entities and matching DEXPI InstrumentationFunction entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD03-P2",
+          "query": "List Asset Inventory Asset entities and matching DEXPI InstrumentationFunction entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD03-P3",
+          "query": "Retrieve Asset Inventory Asset entities and matching DEXPI InstrumentationFunction entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD03-P4",
+          "query": "Return Asset Inventory Asset entities and matching DEXPI InstrumentationFunction entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD03-P5",
+          "query": "Display Asset Inventory Asset entities and matching DEXPI InstrumentationFunction entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD04",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "assetinventory",
+          "ecad"
+        ],
+        "projections": [
+          "Asset",
+          "Device"
+        ],
+        "mapping_id": "assetinventory-ecad-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD04",
+      "paraphrases": [
+        {
+          "id": "CD04-P1",
+          "query": "Show Asset Inventory Asset entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD04-P2",
+          "query": "List Asset Inventory Asset entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD04-P3",
+          "query": "Retrieve Asset Inventory Asset entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD04-P4",
+          "query": "Return Asset Inventory Asset entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD04-P5",
+          "query": "Display Asset Inventory Asset entities and matching ECAD Device entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD05",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "assetinventory",
+          "opcuaconnectivity"
+        ],
+        "projections": [
+          "Asset",
+          "SignalMapping"
+        ],
+        "mapping_id": "assetinventory-opcuaconnectivity-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD05",
+      "paraphrases": [
+        {
+          "id": "CD05-P1",
+          "query": "Show Asset Inventory Asset entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD05-P2",
+          "query": "List Asset Inventory Asset entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD05-P3",
+          "query": "Retrieve Asset Inventory Asset entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD05-P4",
+          "query": "Return Asset Inventory Asset entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD05-P5",
+          "query": "Display Asset Inventory Asset entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD06",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "assetinventory",
+          "productcatalog"
+        ],
+        "projections": [
+          "Asset",
+          "Product"
+        ],
+        "mapping_id": "assetinventory-productcatalog-product-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD06",
+      "paraphrases": [
+        {
+          "id": "CD06-P1",
+          "query": "Show Asset Inventory Asset entities and matching Product Catalog Product entities joined by ProductIdentifier."
+        },
+        {
+          "id": "CD06-P2",
+          "query": "List Asset Inventory Asset entities and matching Product Catalog Product entities joined by ProductIdentifier."
+        },
+        {
+          "id": "CD06-P3",
+          "query": "Retrieve Asset Inventory Asset entities and matching Product Catalog Product entities joined by ProductIdentifier."
+        },
+        {
+          "id": "CD06-P4",
+          "query": "Return Asset Inventory Asset entities and matching Product Catalog Product entities joined by ProductIdentifier."
+        },
+        {
+          "id": "CD06-P5",
+          "query": "Display Asset Inventory Asset entities and matching Product Catalog Product entities joined by ProductIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD07",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "ecad"
+        ],
+        "projections": [
+          "ActuatingFunction",
+          "Device"
+        ],
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD07",
+      "paraphrases": [
+        {
+          "id": "CD07-P1",
+          "query": "Show DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD07-P2",
+          "query": "List DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD07-P3",
+          "query": "Retrieve DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD07-P4",
+          "query": "Return DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD07-P5",
+          "query": "Display DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD08",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "ecad"
+        ],
+        "projections": [
+          "InstrumentationFunction",
+          "Device"
+        ],
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD08",
+      "paraphrases": [
+        {
+          "id": "CD08-P1",
+          "query": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD08-P2",
+          "query": "List DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD08-P3",
+          "query": "Retrieve DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD08-P4",
+          "query": "Return DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD08-P5",
+          "query": "Display DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD09",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "opcuaconnectivity"
+        ],
+        "projections": [
+          "ActuatingFunction",
+          "SignalMapping"
+        ],
+        "mapping_id": "dexpi-opcua-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD09",
+      "paraphrases": [
+        {
+          "id": "CD09-P1",
+          "query": "Show DEXPI ActuatingFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD09-P2",
+          "query": "List DEXPI ActuatingFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD09-P3",
+          "query": "Retrieve DEXPI ActuatingFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD09-P4",
+          "query": "Return DEXPI ActuatingFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD09-P5",
+          "query": "Display DEXPI ActuatingFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD10",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "opcuaconnectivity"
+        ],
+        "projections": [
+          "InstrumentationFunction",
+          "SignalMapping"
+        ],
+        "mapping_id": "dexpi-opcua-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD10",
+      "paraphrases": [
+        {
+          "id": "CD10-P1",
+          "query": "Show DEXPI InstrumentationFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD10-P2",
+          "query": "List DEXPI InstrumentationFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD10-P3",
+          "query": "Retrieve DEXPI InstrumentationFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD10-P4",
+          "query": "Return DEXPI InstrumentationFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD10-P5",
+          "query": "Display DEXPI InstrumentationFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD11",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "opcuaconnectivity"
+        ],
+        "projections": [
+          "Device",
+          "SignalMapping"
+        ],
+        "mapping_id": "ecad-opcuaconnectivity-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD11",
+      "paraphrases": [
+        {
+          "id": "CD11-P1",
+          "query": "Show ECAD Device entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD11-P2",
+          "query": "List ECAD Device entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD11-P3",
+          "query": "Retrieve ECAD Device entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD11-P4",
+          "query": "Return ECAD Device entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        },
+        {
+          "id": "CD11-P5",
+          "query": "Display ECAD Device entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD12",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "ecad"
+        ],
+        "projections": [
+          "InstrumentationFunction",
+          "Device"
+        ],
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "filters": [
+          [
+            "right",
+            "DeviceType",
+            "Pressure"
+          ]
+        ],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD12",
+      "paraphrases": [
+        {
+          "id": "CD12-P1",
+          "query": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure."
+        },
+        {
+          "id": "CD12-P2",
+          "query": "List DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure."
+        },
+        {
+          "id": "CD12-P3",
+          "query": "Retrieve DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure."
+        },
+        {
+          "id": "CD12-P4",
+          "query": "Return DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure."
+        },
+        {
+          "id": "CD12-P5",
+          "query": "Display DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD13",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "ecad"
+        ],
+        "projections": [
+          "InstrumentationFunction",
+          "Device"
+        ],
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "filters": [
+          [
+            "right",
+            "LocalId",
+            "PI-1301"
+          ]
+        ],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD13",
+      "paraphrases": [
+        {
+          "id": "CD13-P1",
+          "query": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD LocalId equal to PI-1301."
+        },
+        {
+          "id": "CD13-P2",
+          "query": "List DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD LocalId equal to PI-1301."
+        },
+        {
+          "id": "CD13-P3",
+          "query": "Retrieve DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD LocalId equal to PI-1301."
+        },
+        {
+          "id": "CD13-P4",
+          "query": "Return DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD LocalId equal to PI-1301."
+        },
+        {
+          "id": "CD13-P5",
+          "query": "Display DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD LocalId equal to PI-1301."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD14",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "ecad"
+        ],
+        "projections": [
+          "InstrumentationFunction",
+          "Device"
+        ],
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "filters": [
+          [
+            "right",
+            "DeviceType",
+            "Pressure"
+          ],
+          [
+            "right",
+            "LocalId",
+            "PI-1301"
+          ]
+        ],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-CD14",
+      "paraphrases": [
+        {
+          "id": "CD14-P1",
+          "query": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure with ECAD LocalId equal to PI-1301."
+        },
+        {
+          "id": "CD14-P2",
+          "query": "List DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure with ECAD LocalId equal to PI-1301."
+        },
+        {
+          "id": "CD14-P3",
+          "query": "Retrieve DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure with ECAD LocalId equal to PI-1301."
+        },
+        {
+          "id": "CD14-P4",
+          "query": "Return DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure with ECAD LocalId equal to PI-1301."
+        },
+        {
+          "id": "CD14-P5",
+          "query": "Display DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure with ECAD LocalId equal to PI-1301."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD15",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "ecad"
+        ],
+        "projections": [
+          "InstrumentationFunction",
+          "Device"
+        ],
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "filters": [],
+        "order_by": [
+          "right",
+          "LocalId",
+          "ASC"
+        ],
+        "limit": 5
+      },
+      "reference_query_id": "REF-CD15",
+      "paraphrases": [
+        {
+          "id": "CD15-P1",
+          "query": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD15-P2",
+          "query": "List DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD15-P3",
+          "query": "Retrieve DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD15-P4",
+          "query": "Return DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD15-P5",
+          "query": "Display DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD16",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "ecad"
+        ],
+        "projections": [
+          "InstrumentationFunction",
+          "Device"
+        ],
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "filters": [],
+        "order_by": [
+          "left",
+          "LocalId",
+          "DESC"
+        ],
+        "limit": 5
+      },
+      "reference_query_id": "REF-CD16",
+      "paraphrases": [
+        {
+          "id": "CD16-P1",
+          "query": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5."
+        },
+        {
+          "id": "CD16-P2",
+          "query": "List DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5."
+        },
+        {
+          "id": "CD16-P3",
+          "query": "Retrieve DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5."
+        },
+        {
+          "id": "CD16-P4",
+          "query": "Return DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5."
+        },
+        {
+          "id": "CD16-P5",
+          "query": "Display DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD17",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "ecad"
+        ],
+        "projections": [
+          "ActuatingFunction",
+          "Device"
+        ],
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "filters": [],
+        "order_by": [
+          "right",
+          "LocalId",
+          "ASC"
+        ],
+        "limit": 5
+      },
+      "reference_query_id": "REF-CD17",
+      "paraphrases": [
+        {
+          "id": "CD17-P1",
+          "query": "Show DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD17-P2",
+          "query": "List DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD17-P3",
+          "query": "Retrieve DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD17-P4",
+          "query": "Return DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD17-P5",
+          "query": "Display DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "CD18",
+      "type": "cross_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "ecad"
+        ],
+        "projections": [
+          "ActuatingFunction",
+          "Device"
+        ],
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "filters": [],
+        "order_by": [
+          "left",
+          "LocalId",
+          "DESC"
+        ],
+        "limit": 5
+      },
+      "reference_query_id": "REF-CD18",
+      "paraphrases": [
+        {
+          "id": "CD18-P1",
+          "query": "Show DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5."
+        },
+        {
+          "id": "CD18-P2",
+          "query": "List DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5."
+        },
+        {
+          "id": "CD18-P3",
+          "query": "Retrieve DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5."
+        },
+        {
+          "id": "CD18-P4",
+          "query": "Return DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5."
+        },
+        {
+          "id": "CD18-P5",
+          "query": "Display DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "N39",
+      "type": "negative",
+      "expected_behavior": "reject",
+      "expected_semantics": {
+        "expected_rejection": "unknown_entity"
+      },
+      "reference_query_id": null,
+      "paraphrases": [
+        {
+          "id": "N39-P1",
+          "query": "Show ECAD QuantumController entities."
+        },
+        {
+          "id": "N39-P2",
+          "query": "List ECAD QuantumController entities."
+        },
+        {
+          "id": "N39-P3",
+          "query": "Retrieve ECAD QuantumController entities."
+        },
+        {
+          "id": "N39-P4",
+          "query": "Return ECAD QuantumController entities."
+        },
+        {
+          "id": "N39-P5",
+          "query": "Display ECAD QuantumController entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "N40",
+      "type": "negative",
+      "expected_behavior": "reject",
+      "expected_semantics": {
+        "expected_rejection": "unknown_property"
+      },
+      "reference_query_id": null,
+      "paraphrases": [
+        {
+          "id": "N40-P1",
+          "query": "Show QuantumEfficiency values of ECAD Devices."
+        },
+        {
+          "id": "N40-P2",
+          "query": "List QuantumEfficiency values of ECAD Devices."
+        },
+        {
+          "id": "N40-P3",
+          "query": "Retrieve QuantumEfficiency values of ECAD Devices."
+        },
+        {
+          "id": "N40-P4",
+          "query": "Return QuantumEfficiency values of ECAD Devices."
+        },
+        {
+          "id": "N40-P5",
+          "query": "Display QuantumEfficiency values of ECAD Devices."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "N41",
+      "type": "negative",
+      "expected_behavior": "reject",
+      "expected_semantics": {
+        "expected_rejection": "ambiguous_domain"
+      },
+      "reference_query_id": null,
+      "paraphrases": [
+        {
+          "id": "N41-P1",
+          "query": "Show all LocalId values without specifying a domain."
+        },
+        {
+          "id": "N41-P2",
+          "query": "List all LocalId values without specifying a domain."
+        },
+        {
+          "id": "N41-P3",
+          "query": "Retrieve all LocalId values without specifying a domain."
+        },
+        {
+          "id": "N41-P4",
+          "query": "Return all LocalId values without specifying a domain."
+        },
+        {
+          "id": "N41-P5",
+          "query": "Display all LocalId values without specifying a domain."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "N42",
+      "type": "negative",
+      "expected_behavior": "reject",
+      "expected_semantics": {
+        "expected_rejection": "ambiguous_owner"
+      },
+      "reference_query_id": null,
+      "paraphrases": [
+        {
+          "id": "N42-P1",
+          "query": "Show ECAD LocalId values without specifying an entity owner."
+        },
+        {
+          "id": "N42-P2",
+          "query": "List ECAD LocalId values without specifying an entity owner."
+        },
+        {
+          "id": "N42-P3",
+          "query": "Retrieve ECAD LocalId values without specifying an entity owner."
+        },
+        {
+          "id": "N42-P4",
+          "query": "Return ECAD LocalId values without specifying an entity owner."
+        },
+        {
+          "id": "N42-P5",
+          "query": "Display ECAD LocalId values without specifying an entity owner."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "N43",
+      "type": "negative",
+      "expected_behavior": "reject",
+      "expected_semantics": {
+        "expected_rejection": "unregistered_mapping"
+      },
+      "reference_query_id": null,
+      "paraphrases": [
+        {
+          "id": "N43-P1",
+          "query": "Show ECAD Devices and DEXPI InstrumentationFunctions joined using LocalId."
+        },
+        {
+          "id": "N43-P2",
+          "query": "List ECAD Devices and DEXPI InstrumentationFunctions joined using LocalId."
+        },
+        {
+          "id": "N43-P3",
+          "query": "Retrieve ECAD Devices and DEXPI InstrumentationFunctions joined using LocalId."
+        },
+        {
+          "id": "N43-P4",
+          "query": "Return ECAD Devices and DEXPI InstrumentationFunctions joined using LocalId."
+        },
+        {
+          "id": "N43-P5",
+          "query": "Display ECAD Devices and DEXPI InstrumentationFunctions joined using LocalId."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "E45",
+      "type": "empty",
+      "expected_behavior": "execute_empty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [
+          {
+            "property": "Device.LocalId",
+            "operator": "=",
+            "value": "BENCHMARK_NONEXISTENT_001"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-E45",
+      "paraphrases": [
+        {
+          "id": "E45-P1",
+          "query": "Show ECAD Device entities where LocalId is BENCHMARK_NONEXISTENT_001."
+        },
+        {
+          "id": "E45-P2",
+          "query": "List ECAD Device entities where LocalId is BENCHMARK_NONEXISTENT_001."
+        },
+        {
+          "id": "E45-P3",
+          "query": "Retrieve ECAD Device entities where LocalId is BENCHMARK_NONEXISTENT_001."
+        },
+        {
+          "id": "E45-P4",
+          "query": "Return ECAD Device entities where LocalId is BENCHMARK_NONEXISTENT_001."
+        },
+        {
+          "id": "E45-P5",
+          "query": "Display ECAD Device entities where LocalId is BENCHMARK_NONEXISTENT_001."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "E46",
+      "type": "empty",
+      "expected_behavior": "execute_empty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi",
+          "ecad"
+        ],
+        "projections": [
+          "Equipment",
+          "Device"
+        ],
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "filters": [],
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-E46",
+      "paraphrases": [
+        {
+          "id": "E46-P1",
+          "query": "Show DEXPI Equipment entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "E46-P2",
+          "query": "List DEXPI Equipment entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "E46-P3",
+          "query": "Retrieve DEXPI Equipment entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "E46-P4",
+          "query": "Return DEXPI Equipment entities and matching ECAD Device entities joined by AssetIdentifier."
+        },
+        {
+          "id": "E46-P5",
+          "query": "Display DEXPI Equipment entities and matching ECAD Device entities joined by AssetIdentifier."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "H01",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device.EndPoint.LocalId"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-H01",
+      "paraphrases": [
+        {
+          "id": "H01-P1",
+          "query": "Show LocalId values of ECAD Device EndPoint entities."
+        },
+        {
+          "id": "H01-P2",
+          "query": "List LocalId values of ECAD Device EndPoint entities."
+        },
+        {
+          "id": "H01-P3",
+          "query": "Retrieve LocalId values of ECAD Device EndPoint entities."
+        },
+        {
+          "id": "H01-P4",
+          "query": "Return LocalId values of ECAD Device EndPoint entities."
+        },
+        {
+          "id": "H01-P5",
+          "query": "Display LocalId values of ECAD Device EndPoint entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "H02",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device.EndPoint.Address"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-H02",
+      "paraphrases": [
+        {
+          "id": "H02-P1",
+          "query": "Show Address values of ECAD Device EndPoint entities."
+        },
+        {
+          "id": "H02-P2",
+          "query": "List Address values of ECAD Device EndPoint entities."
+        },
+        {
+          "id": "H02-P3",
+          "query": "Retrieve Address values of ECAD Device EndPoint entities."
+        },
+        {
+          "id": "H02-P4",
+          "query": "Return Address values of ECAD Device EndPoint entities."
+        },
+        {
+          "id": "H02-P5",
+          "query": "Display Address values of ECAD Device EndPoint entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "H03",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device.PLCEndPoint.LocalId"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-H03",
+      "paraphrases": [
+        {
+          "id": "H03-P1",
+          "query": "Show LocalId values of ECAD Device PLCEndPoint entities."
+        },
+        {
+          "id": "H03-P2",
+          "query": "List LocalId values of ECAD Device PLCEndPoint entities."
+        },
+        {
+          "id": "H03-P3",
+          "query": "Retrieve LocalId values of ECAD Device PLCEndPoint entities."
+        },
+        {
+          "id": "H03-P4",
+          "query": "Return LocalId values of ECAD Device PLCEndPoint entities."
+        },
+        {
+          "id": "H03-P5",
+          "query": "Display LocalId values of ECAD Device PLCEndPoint entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "H04",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device.PLCEndPoint.Address"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-H04",
+      "paraphrases": [
+        {
+          "id": "H04-P1",
+          "query": "Show Address values of ECAD Device PLCEndPoint entities."
+        },
+        {
+          "id": "H04-P2",
+          "query": "List Address values of ECAD Device PLCEndPoint entities."
+        },
+        {
+          "id": "H04-P3",
+          "query": "Retrieve Address values of ECAD Device PLCEndPoint entities."
+        },
+        {
+          "id": "H04-P4",
+          "query": "Return Address values of ECAD Device PLCEndPoint entities."
+        },
+        {
+          "id": "H04-P5",
+          "query": "Display Address values of ECAD Device PLCEndPoint entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "H05",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "ActuatingFunction.LocalId"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-H05",
+      "paraphrases": [
+        {
+          "id": "H05-P1",
+          "query": "Show LocalId values of DEXPI ActuatingFunction entities."
+        },
+        {
+          "id": "H05-P2",
+          "query": "List LocalId values of DEXPI ActuatingFunction entities."
+        },
+        {
+          "id": "H05-P3",
+          "query": "Retrieve LocalId values of DEXPI ActuatingFunction entities."
+        },
+        {
+          "id": "H05-P4",
+          "query": "Return LocalId values of DEXPI ActuatingFunction entities."
+        },
+        {
+          "id": "H05-P5",
+          "query": "Display LocalId values of DEXPI ActuatingFunction entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "H06",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "InstrumentationFunction.LocalId"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-H06",
+      "paraphrases": [
+        {
+          "id": "H06-P1",
+          "query": "Show LocalId values of DEXPI InstrumentationFunction entities."
+        },
+        {
+          "id": "H06-P2",
+          "query": "List LocalId values of DEXPI InstrumentationFunction entities."
+        },
+        {
+          "id": "H06-P3",
+          "query": "Retrieve LocalId values of DEXPI InstrumentationFunction entities."
+        },
+        {
+          "id": "H06-P4",
+          "query": "Return LocalId values of DEXPI InstrumentationFunction entities."
+        },
+        {
+          "id": "H06-P5",
+          "query": "Display LocalId values of DEXPI InstrumentationFunction entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "H07",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "engineeringbom"
+        ],
+        "projections": [
+          "AssemblyRecord.Revision"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-H07",
+      "paraphrases": [
+        {
+          "id": "H07-P1",
+          "query": "Show Revision values of Engineering BOM AssemblyRecord entities."
+        },
+        {
+          "id": "H07-P2",
+          "query": "List Revision values of Engineering BOM AssemblyRecord entities."
+        },
+        {
+          "id": "H07-P3",
+          "query": "Retrieve Revision values of Engineering BOM AssemblyRecord entities."
+        },
+        {
+          "id": "H07-P4",
+          "query": "Return Revision values of Engineering BOM AssemblyRecord entities."
+        },
+        {
+          "id": "H07-P5",
+          "query": "Display Revision values of Engineering BOM AssemblyRecord entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "H08",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "engineeringbom"
+        ],
+        "projections": [
+          "BOMItemRecord.Revision"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-H08",
+      "paraphrases": [
+        {
+          "id": "H08-P1",
+          "query": "Show Revision values of Engineering BOM BOMItemRecord entities."
+        },
+        {
+          "id": "H08-P2",
+          "query": "List Revision values of Engineering BOM BOMItemRecord entities."
+        },
+        {
+          "id": "H08-P3",
+          "query": "Retrieve Revision values of Engineering BOM BOMItemRecord entities."
+        },
+        {
+          "id": "H08-P4",
+          "query": "Return Revision values of Engineering BOM BOMItemRecord entities."
+        },
+        {
+          "id": "H08-P5",
+          "query": "Display Revision values of Engineering BOM BOMItemRecord entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "H09",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "engineeringbom"
+        ],
+        "projections": [
+          "FunctionalAssociation.SourceRecordId"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-H09",
+      "paraphrases": [
+        {
+          "id": "H09-P1",
+          "query": "Show SourceRecordId values of Engineering BOM FunctionalAssociation entities."
+        },
+        {
+          "id": "H09-P2",
+          "query": "List SourceRecordId values of Engineering BOM FunctionalAssociation entities."
+        },
+        {
+          "id": "H09-P3",
+          "query": "Retrieve SourceRecordId values of Engineering BOM FunctionalAssociation entities."
+        },
+        {
+          "id": "H09-P4",
+          "query": "Return SourceRecordId values of Engineering BOM FunctionalAssociation entities."
+        },
+        {
+          "id": "H09-P5",
+          "query": "Display SourceRecordId values of Engineering BOM FunctionalAssociation entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    },
+    {
+      "scenario_id": "H10",
+      "type": "single_domain",
+      "expected_behavior": "execute_nonempty",
+      "expected_semantics": {
+        "domains": [
+          "engineeringbom"
+        ],
+        "projections": [
+          "ParentLink.SourceRecordId"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "order_by": null,
+        "limit": null
+      },
+      "reference_query_id": "REF-H10",
+      "paraphrases": [
+        {
+          "id": "H10-P1",
+          "query": "Show SourceRecordId values of Engineering BOM ParentLink entities."
+        },
+        {
+          "id": "H10-P2",
+          "query": "List SourceRecordId values of Engineering BOM ParentLink entities."
+        },
+        {
+          "id": "H10-P3",
+          "query": "Retrieve SourceRecordId values of Engineering BOM ParentLink entities."
+        },
+        {
+          "id": "H10-P4",
+          "query": "Return SourceRecordId values of Engineering BOM ParentLink entities."
+        },
+        {
+          "id": "H10-P5",
+          "query": "Display SourceRecordId values of Engineering BOM ParentLink entities."
+        }
+      ],
+      "status": "candidate_pending_review"
+    }
+  ]
+}
