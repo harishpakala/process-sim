@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "contracts": [
+    {
+      "id": "SC-01",
+      "kind": "SC",
+      "specification": "contracts/SC-01.safsl",
+      "binding": "bindings/SC-01.json",
+      "backend": "shacl",
+      "enabled": true
+    },
+    {
+      "id": "SC-02",
+      "kind": "SC",
+      "specification": "contracts/SC-02.safsl",
+      "binding": "bindings/SC-02.json",
+      "backend": "shacl",
+      "enabled": true
+    },
+    {
+      "id": "SC-03",
+      "kind": "SC",
+      "specification": "contracts/SC-03.safsl",
+      "binding": "bindings/SC-03.json",
+      "backend": "shacl",
+      "enabled": true
+    },
+    {
+      "id": "SC-04",
+      "kind": "SC",
+      "specification": "contracts/SC-04.safsl",
+      "binding": "bindings/SC-04.json",
+      "backend": "shacl",
+      "enabled": true
+    },
+    {
+      "id": "LP-03",
+      "kind": "LP",
+      "specification": "policies/LP-03.safsl",
+      "binding": "bindings/LP-03.json",
+      "backend": "ast",
+      "enabled": true,
+      "activation": {
+        "event": "DependencyProjectionCompleted",
+        "scope": "per_contract_instance"
+      },
+      "produces": "ChangeImpactAssessed"
+    },
+    {
+      "id": "LP-04",
+      "kind": "LP",
+      "specification": "policies/LP-04.safsl",
+      "binding": "bindings/LP-04.json",
+      "backend": "ast",
+      "enabled": true,
+      "activation": {
+        "event": "ChangeImpactAssessed",
+        "scope": "per_contract_instance"
+      },
+      "produces": "ReassessmentSelectionCompleted"
+    }
+  ]
+}

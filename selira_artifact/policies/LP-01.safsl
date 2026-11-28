@@ -1,0 +1,21 @@
+// Bound AAS inputs declare the information dependencies of SC-01.
+// ChangeDetected is a trusted runtime projection of a matched proposal.
+// A false Reassess output does not authorize reuse or admission.
+Specification ProductReferenceGovernance {
+    StartTerminal=[LP_01];
+    Ref Submodel AssetInventory = "https://example.org/sm/asset-inventory-template";
+    Ref Submodel ProductCatalog = "https://example.org/sm/product-catalog-template";
+    Process LP_01 {
+        Interface {
+            Terminal Input START;
+            Terminal Output DONE;
+            Port Input Assets = AssetInventory;
+            Port Input Products = ProductCatalog;
+            Port Input ChangeDetected;
+            Port Output Reassess;
+        }
+        Body {
+            assign(Reassess, ChangeDetected);
+        }
+    }
+}

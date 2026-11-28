@@ -1,0 +1,475 @@
+"""GraphDB adapter with guarded atomic SPARQL updates for an exclusive writer."""
+import re
+import json
+import sqlite3
+import logging
+from threading import RLock
+from uuid import uuid4
+
+from rdflib import Graph, URIRef, Literal, BNode
+from rdflib.namespace import XSD
+
+
+def _iri(value):
+    if not isinstance(value, str) or not re.fullmatch(r"[A-Za-z][A-Za-z0-9+.-]*:[^\s<>\x00-\x1f{}|^\x60\\\"]+", value):
+        raise ValueError("Expected absolute safe graph IRI")
+    return URIRef(value).n3()
+
+
+class GraphDBRepository:
+    def __init__(self, endpoint, graph_iris, *, metadata_graph="urn:selira:repository:metadata",
+                 session=None, timeout=60, partition=None, native_mode=False, journal_path=None, delta_updates=False):
+        self._delta_updates = delta_updates
+        self._native_mode = native_mode
+        self._partition = partition
+        self._lock = RLock()
+        self._uncertain = False
+        self._journal = None
+        self._request = None
+        if journal_path is not None:
+            self._journal = sqlite3.connect(str(journal_path), check_same_thread=False)
+            self._journal.execute('CREATE TABLE IF NOT EXISTS pending (slot INTEGER PRIMARY KEY CHECK(slot=1), token TEXT NOT NULL, version INTEGER NOT NULL)')
+            self._journal.execute("CREATE TABLE IF NOT EXISTS requests (source TEXT, message_id TEXT, fingerprint TEXT NOT NULL, response TEXT NOT NULL, token TEXT NOT NULL, PRIMARY KEY(source,message_id))")
+            self._journal.commit()
+            self._uncertain = self._journal.execute('SELECT 1 FROM pending').fetchone() is not None
+        if session is None:
+            import requests
+            session = requests.Session()
+        self._session = session
+        self._endpoint = endpoint.rstrip("/")
+        self._timeout = timeout
+        self._graphs = tuple(dict.fromkeys(_iri(g) for g in graph_iris))
+        self._metadata = _iri(metadata_graph)
+        if not self._graphs or self._metadata in self._graphs:
+            raise ValueError("Expected nonempty governed graphs distinct from metadata")
+
+    def request_outcome(self, source, message_id, fingerprint):
+        with self._lock:
+            if self._journal is None:
+                return None
+            row = self._journal.execute(
+                "SELECT fingerprint,response,token FROM requests WHERE source=? AND message_id=?",
+                (source, message_id)).fetchone()
+            if row is None:
+                return None
+            if row[0] != fingerprint:
+                raise ValueError("Conflicting message ID reuse")
+            if row[2]:
+                return {"pending": True}
+            return json.loads(row[1])
+
+    def set_request_context(self, source, message_id, fingerprint, response):
+        # Exclusive coordinator owns this context until its submit returns.
+        self._request = (source, message_id, fingerprint, response)
+
+    def clear_request_context(self):
+        self._request = None
+
+    def pending_commit(self):
+        with self._lock:
+            if self._journal is None:
+                return None
+            return self._journal.execute("SELECT token, version FROM pending").fetchone()
+
+    def reconcile_pending(self, *, remote_quiescent=False):
+        """Resolve a journaled attempt only after operator-confirmed quiescence.
+
+        Returns persistence status, not a new semantic admission decision.
+        Exclusive writer and dedicated journal per repository are required.
+        """
+        with self._lock:
+            pending = self.pending_commit()
+            if pending is None:
+                raise ValueError("No durable pending commit")
+            if not remote_quiescent:
+                raise RepositoryUncertain("Remote update may still execute")
+            token, version = pending
+            if version == -1:
+                check = self._session.post(self._endpoint,
+                    data={"query": f"ASK {{ VALUES ?g {{ {self._metadata} <urn:selira:repository:native> }} GRAPH ?g {{ ?s ?p ?o }} }}", "infer": "false"},
+                    headers={"Accept": "application/sparql-results+json"}, timeout=self._timeout)
+                check.raise_for_status()
+                if not check.json()["boolean"]:
+                    with self._journal:
+                        self._journal.execute("DELETE FROM pending WHERE slot=1")
+                    self._uncertain = False
+                    return "NOT_COMMITTED"
+                _, _, observed, actual_token = self.native_snapshot()
+                if observed != 1 or actual_token != token:
+                    raise RepositoryUncertain("Adoption identity mismatch")
+                with self._journal:
+                    self._journal.execute("DELETE FROM pending WHERE slot=1")
+                self._uncertain = False
+                return "COMMITTED"
+            _, observed = self.snapshot()
+            if observed == version:
+                status = "NOT_COMMITTED"
+            elif observed == version + 1:
+                _, _, native_version, actual_token = self.native_snapshot()
+                if native_version != observed or actual_token != token:
+                    raise RepositoryUncertain("Commit identity mismatch")
+                status = "COMMITTED"
+            else:
+                raise RepositoryUncertain("Unexpected repository version")
+            with self._journal:
+                if status == "NOT_COMMITTED":
+                    self._journal.execute("DELETE FROM requests WHERE token=?", (token,))
+                else:
+                    self._journal.execute("UPDATE requests SET token='' WHERE token=?", (token,))
+                self._journal.execute("DELETE FROM pending WHERE slot=1")
+            self._uncertain = False
+            return status
+
+    def inspect_adoption(self, expected_parts):
+        """Read-only preflight; no metadata or governed triples are modified."""
+        with self._lock:
+            if self._uncertain:
+                raise RepositoryUncertain("Repository requires reconciliation")
+            if {_iri(k) for k in expected_parts} != set(self._graphs):
+                raise ValueError("Adoption scope mismatch")
+            query = f"""SELECT ?g ?s ?p ?o WHERE {{
+                VALUES ?g {{ {' '.join(self._graphs)} }}
+                GRAPH ?g {{ ?s ?p ?o }}
+            }}"""
+            response = self._session.post(self._endpoint,
+                data={"query": query, "infer": "false"},
+                headers={"Accept": "application/sparql-results+json"}, timeout=self._timeout)
+            response.raise_for_status()
+            actual = {k: Graph() for k in expected_parts}
+            for row in response.json()["results"]["bindings"]:
+                actual[row["g"]["value"]].add(tuple(_term(row[k]) for k in ("s", "p", "o")))
+            differences = {}
+            for key, expected in expected_parts.items():
+                a, b = rdf11_triples(actual[key]), rdf11_triples(expected)
+                differences[key] = {"actual": len(a), "expected": len(b),
+                                    "extra": len(a-b), "missing": len(b-a)}
+            check = self._session.post(self._endpoint,
+                data={"query": f"ASK {{ VALUES ?g {{ {self._metadata} <urn:selira:repository:native> }} GRAPH ?g {{ ?s ?p ?o }} }}",
+                      "infer": "false"},
+                headers={"Accept": "application/sparql-results+json"}, timeout=self._timeout)
+            check.raise_for_status()
+            reserved = check.json()["boolean"]
+            return {"graphs": differences, "reserved_metadata_present": reserved,
+                    "eligible": not reserved and all(not d["extra"] and not d["missing"]
+                                                     for d in differences.values())}
+
+    def adopt_qualified(self, documents, parts):
+        """Metadata-only adoption of a caller-qualified state; exclusive writer required."""
+        with self._lock:
+            if not self._native_mode or self._journal is None or self._uncertain:
+                raise ValueError("Adoption requires native mode and a clear durable journal")
+            if not documents or any(k != d.get("id") for k,d in documents.items()):
+                raise ValueError("Invalid native documents")
+            if not self.inspect_adoption(parts)["eligible"]:
+                raise ValueError("Existing RDF or reserved metadata mismatch")
+            token = uuid4().hex
+            payload = Literal(json.dumps(documents, ensure_ascii=False, sort_keys=True, allow_nan=False)).n3()
+            native = "<urn:selira:repository:native>"
+            query = f"""INSERT {{
+                GRAPH {self._metadata} {{ <urn:selira:repository> <urn:selira:version> {Literal(1, datatype=XSD.integer).n3()} ;
+                    <urn:selira:commitToken> "{token}" . }}
+                GRAPH {native} {{ <urn:selira:repository> <urn:selira:documents> {payload} . }}
+            }} WHERE {{ FILTER NOT EXISTS {{
+                VALUES ?g {{ {self._metadata} {native} }} GRAPH ?g {{ ?s ?p ?o }}
+            }} }}"""
+            with self._journal:
+                self._journal.execute("INSERT INTO pending VALUES (1, ?, -1)", (token,))
+            try:
+                response = self._session.post(self._endpoint + "/statements",
+                    data=query.encode("utf-8"), headers={"Content-Type": "application/sparql-update"},
+                    timeout=self._timeout)
+                response.raise_for_status()
+                saved, actual, version, observed_token = self.native_snapshot()
+                if (version != 1 or observed_token != token or saved != documents
+                        or set(actual) != set(parts) or any(rdf11_triples(actual[k]) != rdf11_triples(parts[k]) for k in parts)):
+                    raise RepositoryUncertain("Adoption confirmation mismatch")
+                with self._journal:
+                    self._journal.execute("DELETE FROM pending WHERE slot=1")
+                return version
+            except Exception as exc:
+                self._uncertain = True
+                raise RepositoryUncertain("Adoption outcome unresolved") from exc
+
+    def initialize_empty(self):
+        """Explicit bootstrap only; requires exclusive writer and empty governed scope.
+
+        Never adopts or clears existing instance graphs. A failed request must
+        be investigated before startup continues.
+        """
+        with self._lock:
+            if self._uncertain:
+                raise RepositoryUncertain("Repository requires reconciliation")
+            native = "<urn:selira:repository:native>"
+            if native in self._graphs or native == self._metadata:
+                raise ValueError("Native graph must be reserved")
+            scopes = " ".join((*self._graphs, self._metadata, native))
+            query = f"""
+INSERT {{ GRAPH {self._metadata} {{
+ <urn:selira:repository> <urn:selira:version> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
+}} }}
+WHERE {{
+ FILTER NOT EXISTS {{
+  VALUES ?g {{ {scopes} }}
+  GRAPH ?g {{ ?s ?p ?o }}
+ }}
+}}
+"""
+            try:
+                response = self._session.post(
+                    self._endpoint + "/statements", data=query.encode("utf-8"),
+                    headers={"Content-Type": "application/sparql-update"},
+                    timeout=self._timeout)
+                response.raise_for_status()
+                graph, version = self.snapshot()
+                if version != 0 or len(graph):
+                    raise ValueError("Repository is not an empty bootstrap state")
+                # Verify that no native data or unexpected metadata exists.
+                check = self._session.post(
+                    self._endpoint,
+                    data={"query": f"""ASK {{
+ {{ GRAPH {native} {{ ?s ?p ?o }} }}
+ UNION
+ {{ GRAPH {self._metadata} {{ ?s ?p ?o }}
+ FILTER(!(sameTerm(?s, <urn:selira:repository>) &&
+ sameTerm(?p, <urn:selira:version>) &&
+ sameTerm(?o, "0"^^<http://www.w3.org/2001/XMLSchema#integer>))) }}
+}}""", "infer": "false"},
+                    headers={"Accept": "application/sparql-results+json"},
+                    timeout=self._timeout)
+                check.raise_for_status()
+                if check.json().get("boolean") is not False:
+                    raise ValueError("Unexpected bootstrap metadata or native state")
+                return 0
+            except Exception:
+                self._uncertain = True
+                raise
+
+    def native_snapshot(self):
+        """Read native JSON, commit token, version and named RDF in one SELECT."""
+        if not self._native_mode:
+            raise ValueError("Native mode required")
+        with self._lock:
+            query = f"""
+SELECT ?version ?token ?documents ?g ?s ?p ?o WHERE {{
+ GRAPH {self._metadata} {{
+  <urn:selira:repository> <urn:selira:version> ?version ;
+                         <urn:selira:commitToken> ?token .
+ }}
+ GRAPH <urn:selira:repository:native> {{
+  <urn:selira:repository> <urn:selira:documents> ?documents .
+ }}
+ OPTIONAL {{ VALUES ?g {{ {' '.join(self._graphs)} }} GRAPH ?g {{ ?s ?p ?o }} }}
+}}
+"""
+            response = self._session.post(self._endpoint,
+                data={"query": query, "infer": "false"},
+                headers={"Accept": "application/sparql-results+json"}, timeout=self._timeout)
+            response.raise_for_status()
+            rows = response.json()["results"]["bindings"]
+            metadata = set()
+            parts = {g[1:-1]: Graph() for g in self._graphs}
+            for row in rows:
+                v, t, d = (row[k] for k in ("version", "token", "documents"))
+                if (v["type"] != "literal" or v.get("datatype") != str(XSD.integer)
+                    or not re.fullmatch(r"[1-9][0-9]*", v["value"])
+                    or t["type"] != "literal" or not re.fullmatch(r"[0-9a-f]{32}", t["value"])
+                    or d["type"] != "literal"):
+                    raise ValueError("Invalid native snapshot metadata")
+                metadata.add((int(v["value"]), t["value"], d["value"]))
+                present = [k in row for k in ("g", "s", "p", "o")]
+                if any(present):
+                    if not all(present) or row["g"]["value"] not in parts:
+                        raise ValueError("Invalid native graph result")
+                    s, p, o = (_term(row[k]) for k in ("s", "p", "o"))
+                    if not isinstance(s, URIRef) or not isinstance(p, URIRef):
+                        raise ValueError("Invalid native RDF triple")
+                    parts[row["g"]["value"]].add((s, p, o))
+            if len(metadata) != 1:
+                raise ValueError("Missing or inconsistent native snapshot")
+            version, token, payload = metadata.pop()
+            documents = json.loads(payload)
+            if not isinstance(documents, dict) or not documents or any(
+                not isinstance(doc, dict) or key != doc.get("id") for key, doc in documents.items()):
+                raise ValueError("Invalid persisted documents")
+            return documents, parts, version, token
+
+    def snapshot(self):
+        # One explicit-only SELECT; no default-union or inferred triples.
+        query = f"""
+SELECT ?version ?g ?s ?p ?o WHERE {{
+  GRAPH {self._metadata} {{
+    <urn:selira:repository> <urn:selira:version> ?version .
+  }}
+  OPTIONAL {{
+    VALUES ?g {{ {' '.join(self._graphs)} }}
+    GRAPH ?g {{ ?s ?p ?o }}
+  }}
+}}
+"""
+        response = self._session.post(
+            self._endpoint, data={"query": query, "infer": "false"},
+            headers={"Accept": "application/sparql-results+json"},
+            timeout=self._timeout)
+        response.raise_for_status()
+        rows = response.json()["results"]["bindings"]
+        versions = set()
+        graph = Graph()
+        for row in rows:
+            v = row["version"]
+            if (v["type"] != "literal" or v.get("datatype") != str(XSD.integer)
+                    or not re.fullmatch(r"0|[1-9][0-9]*", v["value"])):
+                raise ValueError("Invalid repository version")
+            versions.add(int(v["value"]))
+            present = [k in row for k in ("g", "s", "p", "o")]
+            if any(present):
+                if not all(present) or _iri(row["g"]["value"]) not in self._graphs:
+                    raise ValueError("Invalid governed graph result")
+                s, p, o = (_term(row[k]) for k in ("s", "p", "o"))
+                if not isinstance(s, (URIRef, BNode)) or not isinstance(p, URIRef):
+                    raise ValueError("Invalid RDF triple")
+                graph.add((s, p, o))
+        if len(versions) != 1:
+            raise ValueError("Missing or inconsistent repository version")
+        return graph, versions.pop()
+
+    def compare_and_commit(self, expected_version, graph):
+        if self._native_mode:
+            raise ValueError('RDF-only writes disabled in native mode')
+        return self._commit(expected_version, graph)
+
+    def compare_and_commit_native(self, expected_version, graph, documents, parts):
+        if not self._native_mode:
+            raise ValueError('Native mode required')
+        if not documents or any(key != doc.get('id') for key, doc in documents.items()):
+            raise ValueError('Invalid native document identities')
+        native = Literal(json.dumps(documents, ensure_ascii=False, sort_keys=True, allow_nan=False))
+        return self._commit(expected_version, graph, parts=parts, native=native)
+
+    def _commit(self, expected_version, graph, *, parts=None, native=None):
+        if parts is None and self._partition is None:
+            raise NotImplementedError("Explicit named graph partition required")
+        with self._lock:
+            if self._uncertain:
+                raise RepositoryUncertain("Previous commit requires reconciliation")
+            _, version = self.snapshot()
+            if version != expected_version:
+                return False, version
+            parts = {_iri(k): v for k, v in (self._partition(graph) if parts is None else parts).items()}
+            if set(parts) != set(self._graphs):
+                raise ValueError("Partition must cover exactly the governed graphs")
+            if set().union(*(set(g) for g in parts.values())) != set(graph):
+                raise ValueError("Partition does not reproduce candidate")
+            for g in parts.values():
+                for s, p, o in g:
+                    if not isinstance(s, URIRef) or not isinstance(p, URIRef) or not isinstance(o, (URIRef, Literal)):
+                        raise ValueError("Writes require ground RDF triples")
+                    for term in (s, p, o):
+                        if isinstance(term, URIRef):
+                            _iri(str(term))
+            token = uuid4().hex
+            old = Literal(version, datatype=XSD.integer).n3()
+            new = Literal(version + 1, datatype=XSD.integer).n3()
+            subject = "<urn:selira:repository>"
+            vp = "<urn:selira:version>"
+            cp = "<urn:selira:commitToken>"
+            # In native mode read the actual named partitions, not the union.
+            # Version zero has no native snapshot yet.
+            if self._native_mode and self._delta_updates:
+                if version == 0:
+                    previous = {g: Graph() for g in self._graphs}
+                    current, observed = self.snapshot()
+                    if observed != version or len(current):
+                        raise RepositoryUncertain("Unexpected initial state")
+                else:
+                    _, old_parts, observed, _ = self.native_snapshot()
+                    if observed != version:
+                        return False, observed
+                    previous = {_iri(k): v for k, v in old_parts.items()}
+                def ground_delta(g, triples):
+                    return f"GRAPH {g} {{ " + " ".join(
+                        f"{s.n3()} {p.n3()} {o.n3()} ." for s,p,o in triples) + " }"
+                deletes = " ".join(ground_delta(g, rdf11_triples(previous[g]) - rdf11_triples(parts[g]))
+                                   for g in self._graphs)
+                inserts = " ".join(ground_delta(g, rdf11_triples(parts[g]) - rdf11_triples(previous[g]))
+                                   for g in self._graphs)
+                branches = ""
+            else:
+                deletes = " ".join(f"GRAPH {g} {{ ?s{i} ?p{i} ?o{i} }}" for i,g in enumerate(self._graphs))
+                # Separate OPTIONAL patterns would create a Cartesian product.
+                # UNION selects one graph's old triples per solution instead.
+                branches = " UNION ".join(f"{{ GRAPH {g} {{ ?s{i} ?p{i} ?o{i} }} }}" for i,g in enumerate(self._graphs))
+                inserts = " ".join(f"GRAPH {g} {{ " + " ".join(
+                    f"{s.n3()} {p.n3()} {o.n3()} ." for s,p,o in triples) + " }"
+                    for g,triples in parts.items())
+            native_graph = "<urn:selira:repository:native>"
+            if native_graph in self._graphs or native_graph == self._metadata:
+                raise ValueError("Native graph must be reserved")
+            native_delete = f"GRAPH {native_graph} {{ {subject} <urn:selira:documents> ?oldDocuments }}" if native is not None else ""
+            native_insert = f"GRAPH {native_graph} {{ {subject} <urn:selira:documents> {native.n3()} }}" if native is not None else ""
+            native_where = f"OPTIONAL {{ {native_delete} }}" if native is not None else ""
+            query = f"""
+DELETE {{ GRAPH {self._metadata} {{ {subject} {vp} {old} . {subject} {cp} ?previous . }} {deletes} {native_delete} }}
+INSERT {{ GRAPH {self._metadata} {{ {subject} {vp} {new} . {subject} {cp} "{token}" . }} {inserts} {native_insert} }}
+WHERE {{
+ GRAPH {self._metadata} {{ {subject} {vp} {old} .
+ OPTIONAL {{ {subject} {cp} ?previous }} }}
+ FILTER NOT EXISTS {{ GRAPH {self._metadata} {{ {subject} {vp} ?other FILTER(!sameTerm(?other, {old})) }} }}
+ {native_where}
+ {f'OPTIONAL {{ {branches} }}' if branches else ''}
+}}
+"""
+            if self._journal is not None:
+                if not self._native_mode:
+                    raise ValueError("Durable journal requires native mode")
+                with self._journal:
+                    self._journal.execute("INSERT INTO pending VALUES (1, ?, ?)", (token, version))
+                    if self._request is not None:
+                        source, message_id, fingerprint, response = self._request
+                        self._journal.execute("INSERT INTO requests VALUES (?,?,?,?,?)",
+                            (source, message_id, fingerprint, json.dumps(response), token))
+            try:
+                response = self._session.post(self._endpoint + "/statements",
+                    data=query.encode("utf-8"), headers={"Content-Type": "application/sparql-update"},
+                    timeout=self._timeout)
+                response.raise_for_status()
+                check = self._session.post(self._endpoint,
+                    data={"query": f"SELECT ?token WHERE {{ GRAPH {self._metadata} {{ {subject} {vp} {new} ; {cp} ?token }} }}", "infer": "false"},
+                    headers={"Accept": "application/sparql-results+json"}, timeout=self._timeout)
+                check.raise_for_status()
+                rows = check.json()["results"]["bindings"]
+                if len(rows) == 1 and rows[0]["token"]["value"] == token:
+                    if self._journal is not None:
+                        with self._journal:
+                            self._journal.execute("UPDATE requests SET token='' WHERE token=?", (token,))
+                            self._journal.execute("DELETE FROM pending WHERE slot=1")
+                    return True, version + 1
+                raise RepositoryUncertain("Commit token not confirmed")
+            except Exception as exc:
+                self._uncertain = True
+                logging.getLogger(__name__).exception("GraphDB commit outcome unresolved (version=%s, token=%s)", version, token)
+                raise RepositoryUncertain("Commit outcome unresolved; stop writes") from exc
+
+
+class RepositoryUncertain(RuntimeError):
+    """Do not retry automatically: the remote update may have committed."""
+
+
+
+def _term(binding):
+    kind, value = binding["type"], binding["value"]
+    if kind == "uri":
+        _iri(value)
+        return URIRef(value)
+    if kind == "bnode":
+        return BNode(value)
+    if kind in ("literal", "typed-literal"):
+        return Literal(value, lang=binding.get("xml:lang"),
+                       datatype=binding.get("datatype"), normalize=False)
+    raise ValueError("Unsupported RDF result term")
+
+
+def rdf11_triples(graph):
+    """Canonicalize only RDF 1.1 simple strings, preserving other RDF terms."""
+    return {(s, p, Literal(str(o), datatype=XSD.string, normalize=False)
+                    if isinstance(o, Literal) and o.datatype is None and o.language is None
+                    else o) for s, p, o in graph}

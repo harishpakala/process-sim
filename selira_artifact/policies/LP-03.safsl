@@ -9,13 +9,11 @@ Specification ChangeImpactAssessment {
             Port Input CoverageAttested;
             Port Input PolicyUnchanged;
             Port Input AuthorityUnchanged;
-            Port Input AssignmentChanged;
-            Port Input PreviousLookupChanged;
-            Port Input CandidateLookupChanged;
+            Port Input RelevantDependencyChanged;
             Port Output Affected;
         }
         Body {
-            assign(Affected, or(notS(and(CoverageAttested, PolicyUnchanged, AuthorityUnchanged)), AssignmentChanged, PreviousLookupChanged, CandidateLookupChanged));
+            assign(Affected, or(notS(and(CoverageAttested, PolicyUnchanged, AuthorityUnchanged)), RelevantDependencyChanged));
         }
     }
 }

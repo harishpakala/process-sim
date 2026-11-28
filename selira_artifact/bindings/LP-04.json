@@ -1,0 +1,13 @@
+{
+  "policy_id": "LP-04",
+  "inputs": {
+    "CoverageAttested": "evidence.coverage_attested",
+    "PolicyUnchanged": "context.policy_unchanged",
+    "AuthorityUnchanged": "context.authority_unchanged",
+    "Affected": "assessment.affected"
+  },
+  "outputs": {
+    "Reassess": "selection.reassess",
+    "Reuse": "selection.reuse"
+  }
+}

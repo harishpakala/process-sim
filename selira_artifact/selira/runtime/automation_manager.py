@@ -11,20 +11,28 @@ from rdflib import Graph, RDF, URIRef
 from rdflib.namespace import SH
 from pyshacl import validate
 from .reassessment.selective import compare
+from .contract_registry import load_registry
+from .repository import VersionedRepository
+from .policy_executor import PolicyExecutor
 from selira.compiler.shacl import compile_contract
 from selira.formal.identifier_comparison import compare_fields
 from selira.runtime.admission import VersionedGraphStore, Verdict
 
 
 class MultiContractAutomationManager:
-    def __init__(self, artifacts, *, policy_paths=None):
+    def __init__(self, artifacts, *, policy_paths=None, policy_executor=None,
+                 store: VersionedRepository | None = None):
+        self._policy_executor = policy_executor
+        if policy_paths is not None and policy_executor is not None:
+            raise ValueError("Choose registry or explicit policy paths")
         self._policy_paths = tuple(map(Path, policy_paths)) if policy_paths is not None else None
         if self._policy_paths is not None and len(self._policy_paths) != 2:
             raise ValueError("Expected impact and selection policy paths")
         self._contracts = {}
-        self.store = VersionedGraphStore()
+        self.store = VersionedGraphStore() if store is None else store
         self._lock = RLock()
         self.history = []
+        self._last_observed_version = None
         for source_path, binding_path in artifacts:
             bindings = json.loads(Path(binding_path).read_text(encoding="utf-8"))
             ttl, manifest = compile_contract(Path(source_path).read_text(encoding="utf-8"), bindings)
@@ -49,12 +57,19 @@ class MultiContractAutomationManager:
             raise ValueError("At least one contract required")
 
     @classmethod
-    def from_directory(cls, directory, *, policy_paths=None):
+    def from_directory(cls, directory, *, policy_paths=None, store=None):
         directory = Path(directory)
+        if (directory / "registry" / "contract_registry.json").exists():
+            entries = load_registry(directory)
+            if policy_paths is not None:
+                raise ValueError("Registry configuration replaces explicit policy paths")
+            return cls([(directory / e["specification"], directory / e["binding"])
+                        for e in entries if e["kind"] == "SC" and e["enabled"]],
+                       policy_executor=PolicyExecutor(directory), store=store)
         return cls([(p, directory / "bindings" / (p.stem + ".json"))
                     for p in sorted((directory / "contracts").glob("*.safsl"))
                     if (directory / "bindings" / (p.stem + ".json")).is_file()],
-                   policy_paths=policy_paths)
+                   policy_paths=policy_paths, store=store)
 
     def _evaluate(self, graph, entry, ttl, evidence, identity, applicability):
         fp = URIRef(entry["focus_predicate"])
@@ -135,9 +150,19 @@ class MultiContractAutomationManager:
 
     def submit(self, candidate, *, expected_version, evidence_complete=(),
                identity_normalized=False, applicability_confirmed=False,
-               coverage_attested=False, policy_unchanged=False, authority_unchanged=False):
+               coverage_attested=False, policy_unchanged=False, authority_unchanged=False,
+               native_state=None, request_context=None):
         with self._lock:
-            current, version = self.store.snapshot()
+            try:
+                current, version = self.store.snapshot()
+            except Exception as exc:
+                record = {"from_version": self._last_observed_version,
+                          "version": self._last_observed_version, "verdict": "U",
+                          "reason": f"Repository read unresolved: {type(exc).__name__}",
+                          "committed": False, "contracts": {}, "reassessment": None}
+                self.history.append(record)
+                return record
+            self._last_observed_version = version
             reassessment = None
             proposed = Graph()
             proposed += candidate
@@ -162,7 +187,8 @@ class MultiContractAutomationManager:
                                                coverage_attested=coverage_attested,
                                                policy_unchanged=policy_unchanged,
                                                authority_unchanged=authority_unchanged,
-                                               policy_paths=self._policy_paths)
+                                               policy_paths=self._policy_paths,
+                                               policy_executor=self._policy_executor)
                         if not reassessment["equivalent"]:
                             values.add("U")
                     except Exception:
@@ -174,10 +200,30 @@ class MultiContractAutomationManager:
                 elif values == {"NA"}:
                     verdict, reason = Verdict.NA, "All contract populations empty"
                 else:
-                    committed, new_version = self.store.compare_and_commit(version, proposed)
-                    verdict, reason = ((Verdict.V, "Validated and committed") if committed
-                                       else (Verdict.U, "Concurrent update; revalidate"))
+                    try:
+                        if native_state is None:
+                            committed, new_version = self.store.compare_and_commit(version, proposed)
+                        else:
+                            documents, parts = native_state
+                            if request_context is not None:
+                                source, message_id, fingerprint, make_response = request_context
+                                self.store.set_request_context(source, message_id, fingerprint,
+                                                               make_response(outcomes, version + 1))
+                            try:
+                                committed, new_version = self.store.compare_and_commit_native(
+                                    version, proposed, documents, parts)
+                            finally:
+                                if request_context is not None:
+                                    self.store.clear_request_context()
+                        verdict, reason = ((Verdict.V, "Validated and committed") if committed
+                                           else (Verdict.U, "Concurrent update; revalidate"))
+                    except Exception as exc:
+                        committed = False
+                        new_version = version
+                        verdict, reason = Verdict.U, f"Persistence unresolved: {type(exc).__name__}"
+
             record = {"from_version": version, "version": new_version, "verdict": verdict.value,
                       "reason": reason, "committed": committed, "contracts": outcomes, "reassessment": reassessment}
+            self._last_observed_version = new_version
             self.history.append(record)
             return record
