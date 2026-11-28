@@ -127,6 +127,12 @@ function loadSelectedValue() {
 watch(selectedDocumentId, () => selectDocument())
 watch(selectedElementKey, () => loadSelectedValue())
 
+function scopeLabel(scope: string): string {
+  if (scope.includes('asset-inventory-template')) return 'Asset Inventory'
+  if (scope.includes('product-catalog-template')) return 'Product Catalog'
+  return scope
+}
+
 function domainFor(document: AasDocument): string {
   const names: Record<string, string> = {
     AssetInventory: 'assetinventory',
@@ -267,7 +273,7 @@ onMounted(refresh)
     <article class="context-item">
      <strong>Information completeness</strong>
      <span class="context-value">{{ qualification.evidence_complete.length }} scope(s) attested complete</span>
-     <ul v-if="qualification.evidence_complete.length"><li v-for="scope in qualification.evidence_complete" :key="scope">{{ scope }}</li></ul>
+     <ul v-if="qualification.evidence_complete.length"><li v-for="scope in qualification.evidence_complete" :key="scope" :title="scope">{{ scopeLabel(scope) }}</li></ul>
      <span v-else class="context-note">No completeness scopes are currently attested.</span>
     </article>
     <article class="context-item">
