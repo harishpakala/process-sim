@@ -1,0 +1,199 @@
+{
+  "source_revision": "639c59fe9b7fcdbf8b17ec3896ea1a31c22954b1",
+  "shape_paths": 198,
+  "domains": {
+    "assetinventory": {
+      "paths": 23,
+      "repeated_predicates": {},
+      "node_edges": 1
+    },
+    "dexpi": {
+      "paths": 17,
+      "repeated_predicates": {
+        "https://example.org/dexpi/hasAssetIdentifier": 3,
+        "https://example.org/dexpi/hasCrossDomainAssociationEvidence": 2,
+        "https://example.org/dexpi/hasCrossDomainAssociationStatus": 2,
+        "https://example.org/dexpi/hasEngineeringInterpretationNote": 2,
+        "https://example.org/dexpi/hasLocalId": 3
+      },
+      "node_edges": 3
+    },
+    "ecad": {
+      "paths": 33,
+      "repeated_predicates": {
+        "https://example.org/ecad/hasAddress": 4,
+        "https://example.org/ecad/hasLocalId": 7,
+        "https://example.org/ecad/hasAssetIdentifier": 2,
+        "https://example.org/ecad/hasEndPoint": 2,
+        "https://example.org/ecad/hasPLCEndPoint": 2
+      },
+      "node_edges": 8
+    },
+    "engineeringbom": {
+      "paths": 28,
+      "repeated_predicates": {
+        "https://example.org/engineeringbom/hasBOMItemId": 2,
+        "https://example.org/engineeringbom/hasItemDescription": 2,
+        "https://example.org/engineeringbom/hasLabel": 2,
+        "https://example.org/engineeringbom/hasRevision": 2,
+        "https://example.org/engineeringbom/hasStructureStatus": 4,
+        "https://example.org/engineeringbom/hasAssociationBasis": 2,
+        "https://example.org/engineeringbom/hasSourceField": 2,
+        "https://example.org/engineeringbom/hasSourceRecordId": 2
+      },
+      "node_edges": 4
+    },
+    "opcuaconnectivity": {
+      "paths": 15,
+      "repeated_predicates": {},
+      "node_edges": 2
+    },
+    "productcatalog": {
+      "paths": 82,
+      "repeated_predicates": {},
+      "node_edges": 2
+    }
+  },
+  "candidate_cases": [
+    {
+      "id": "G01",
+      "domain": "dexpi",
+      "owner": "ActuatingFunction",
+      "property": "LocalId",
+      "root_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+      "owner_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+      "predicates": [
+        "https://example.org/dexpi/hasActuatingFunction",
+        "https://example.org/dexpi/hasLocalId"
+      ],
+      "evidence": [
+        "https://example.org/dtwise/relationship/a4b691c92838483ab9479261f92e933f465863d06ae13fb8327893f4ea59e974",
+        "https://example.org/dtwise/relationship/257ceb5de6a8d1cf02495d34c003c986f6e8ee5ded2e0fa6f14b6515e8cca4d9",
+        "https://example.org/dtwise/relationship/81369f727070197460c4f9ca6f263f1b89f42b538fd304a0de5345f9101d9164",
+        "https://example.org/dtwise/relationship/5ac19d9f916580cab7891a25e5db062f35fb569982682baa52ba2a60d06d06c9",
+        "https://example.org/dtwise/relationship/6920b95c4ea5e3eb2d4fcc3026ce042a3997be81dcdb4efc309ed524aec63e3b"
+      ],
+      "review_status": "pending"
+    },
+    {
+      "id": "G02",
+      "domain": "dexpi",
+      "owner": "Equipment",
+      "property": "LocalId",
+      "root_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+      "owner_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl",
+      "predicates": [
+        "https://example.org/dexpi/hasEquipment",
+        "https://example.org/dexpi/hasLocalId"
+      ],
+      "evidence": [
+        "https://example.org/dtwise/relationship/8936381430c96c8d06000b0ca8527f8ad77b91df89fc4e75b962cc7226834a14",
+        "https://example.org/dtwise/relationship/42c0675349f6f5a12f3e07f2ec9e9661edf19b32af4eec1b6cf31357da34f649",
+        "https://example.org/dtwise/relationship/5a57d86efa310d65a35a43e6433da2c42fc0fd6ded3017e8498a149b6b39b2ad",
+        "https://example.org/dtwise/relationship/7ed69a3a6271ce61f516debc8b6e93df42358cee09b03bfaddd38c8511583ab4",
+        "https://example.org/dtwise/relationship/4f7bfe52525e26140c63f0fe1e7cf4bc9e94ae88e841faf7b78091abd0c2fb66"
+      ],
+      "review_status": "pending"
+    },
+    {
+      "id": "G03",
+      "domain": "dexpi",
+      "owner": "InstrumentationFunction",
+      "property": "LocalId",
+      "root_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+      "owner_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ",
+      "predicates": [
+        "https://example.org/dexpi/hasInstrumentationFunction",
+        "https://example.org/dexpi/hasLocalId"
+      ],
+      "evidence": [
+        "https://example.org/dtwise/relationship/fe0b9055ed61d64935b52bb67150368d28f8b7671295f431012774d623342dc0",
+        "https://example.org/dtwise/relationship/1d14a3b48570c07b90ecbc27971566045dabee5776e179456aca31bcb282b112",
+        "https://example.org/dtwise/relationship/d8befbd8be81650884221602ab9cb293f99d00d8ce7be9df745d248ff7fc1ab4",
+        "https://example.org/dtwise/relationship/de4516c9c143d0c96fd322ba6b600e4b0f3b2191ada55d082f7e8bcdf8c4e15d",
+        "https://example.org/dtwise/relationship/baa97e9d90a48741e3c06be75fd44fa6cbfbe4d6da964d3a925d211dc710920f"
+      ],
+      "review_status": "pending"
+    },
+    {
+      "id": "G04",
+      "domain": "engineeringbom",
+      "owner": "AssemblyRecord",
+      "property": "Revision",
+      "root_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU",
+      "owner_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU",
+      "predicates": [
+        "https://example.org/engineeringbom/hasAssemblyRecord",
+        "https://example.org/engineeringbom/hasRevision"
+      ],
+      "evidence": [
+        "https://example.org/dtwise/relationship/3a870a64c23e16240078a0e7c134db6e4a56302baa5f0b9ba1223862e7ec9f8f",
+        "https://example.org/dtwise/relationship/1fd49343ba0a71385082957029519a31b346ed2648d4878b701df13f9c09d8ab",
+        "https://example.org/dtwise/relationship/527131d526ee872272554e8722d92671b59394660adb832e36087fdecc7c5197",
+        "https://example.org/dtwise/relationship/34c2bcf90262e45bdb366328f61fcd62c1a3cf3d202ff281ba1d22cd4bb17327",
+        "https://example.org/dtwise/relationship/fad41e6d5c5a2169a5f28af0b51b24b78637655a557eee5fac524f435f2cf9df"
+      ],
+      "review_status": "pending"
+    },
+    {
+      "id": "G05",
+      "domain": "engineeringbom",
+      "owner": "BOMItemRecord",
+      "property": "Revision",
+      "root_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU",
+      "owner_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
+      "predicates": [
+        "https://example.org/engineeringbom/hasBOMItemRecord",
+        "https://example.org/engineeringbom/hasRevision"
+      ],
+      "evidence": [
+        "https://example.org/dtwise/relationship/70f4023ecf459b12271ac92f02694a8888c40271011794842b132058e4eb01cc",
+        "https://example.org/dtwise/relationship/8d77b55370dfec48d8168830f78ad2a703532b11dbe42f8b815d751c001e055e",
+        "https://example.org/dtwise/relationship/e20486100355e6ef9c35baa0238ed34fae2ce8099ab5a63de7578b06141b6ea0",
+        "https://example.org/dtwise/relationship/685a905165496e8a814c2911b58c005498041d670110823b7ea3d3675546460b",
+        "https://example.org/dtwise/relationship/dadde3a4d0db6490471d30813956cf6e23953209534e5a9c160fb036f7917b01"
+      ],
+      "review_status": "pending"
+    },
+    {
+      "id": "G06",
+      "domain": "engineeringbom",
+      "owner": "FunctionalAssociation",
+      "property": "SourceRecordId",
+      "root_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU",
+      "owner_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl",
+      "predicates": [
+        "https://example.org/engineeringbom/hasFunctionalAssociation",
+        "https://example.org/engineeringbom/hasSourceRecordId"
+      ],
+      "evidence": [
+        "https://example.org/dtwise/relationship/69c6f511448e1e8c3243df4d81397c8ce18549803d7982d9fa41436607bd0571",
+        "https://example.org/dtwise/relationship/fef7ddd96fc4ebb2769adc1ed7d33a15980b314759f3419d609b75657ee99c6e",
+        "https://example.org/dtwise/relationship/1b2d9d61aa74b5a6f6b5d1cca34e4b5fd05cf6ce8b7be3f2f952ed8815e28088",
+        "https://example.org/dtwise/relationship/1a59c4c77d93fdad9c142b5e66890ffeb900363009a7af99daf25967fd16de71",
+        "https://example.org/dtwise/relationship/7ca6a4072345a2e23d51e729d96e6b4cc0ad6b6411b16887752c631c182310bb"
+      ],
+      "review_status": "pending"
+    },
+    {
+      "id": "G07",
+      "domain": "engineeringbom",
+      "owner": "ParentLink",
+      "property": "SourceRecordId",
+      "root_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU",
+      "owner_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50TGlua3MuUGFyZW50TGluay9ub2RlU2hhcGU",
+      "predicates": [
+        "https://example.org/engineeringbom/hasParentLink",
+        "https://example.org/engineeringbom/hasSourceRecordId"
+      ],
+      "evidence": [
+        "https://example.org/dtwise/relationship/6fa7fa8d3bed861f99b0f5d6364fbb1b423514e89bfc1f3fe27b958b9670dcfc",
+        "https://example.org/dtwise/relationship/ed0376f4b1778bb71cd3de21816a5d1a4b7e2dd403b59e965456c128d7c845f1",
+        "https://example.org/dtwise/relationship/faead2392973ffcdb8e4b54a8808821ef9434057716f0368f77bcdfbe6c7ad27",
+        "https://example.org/dtwise/relationship/ae8f090e0ff1ed6f87abb59c638f5ae326018d219ece2368216910cb079c6b4b",
+        "https://example.org/dtwise/relationship/26b0eefaa6349ee02d1ce9fe8d6aaeba6a25e670515fb399b01d17a284274496"
+      ],
+      "review_status": "pending"
+    }
+  ]
+}
