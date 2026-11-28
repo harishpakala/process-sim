@@ -49,10 +49,11 @@ function findRecord(document:AasDocument){
   const candidates=(root.value as AasElement[]).filter(e=>e.modelType==='SubmodelElementCollection')
   const scored=candidates.map(e=>({element:e,score:valuesOf([e]).filter(v=>targets.includes(v)).length}))
     .sort((a,b)=>b.score-a.score)
-  return scored[0]?.score ? scored[0].element : null
+  if (!scored[0]?.score || (scored[1] && scored[1].score === scored[0].score)) return null
+  return scored[0].element
 }
-async function refresh(){
-  loading.value=true;error.value='';result.value=null
+async function refresh(clearResult = true){
+  loading.value=true;error.value='';if(clearResult)result.value=null
   try{
     const response=await fetch('/api/governance/state')
     const payload=await response.json()
@@ -96,8 +97,8 @@ async function submit(){
     const data=await response.json()
     if(!response.ok)throw new Error(data.error||'SELiRA rejected the change request')
     result.value=data
-    if(data.committed){await refresh();emit('committed')}
-  }catch(e){error.value=e instanceof Error?e.message:String(e);await refresh()}
+    if(data.committed){await refresh(false);emit('committed')}
+  }catch(e){error.value=e instanceof Error?e.message:String(e)}
   finally{submitting.value=false}
 }
 </script>
