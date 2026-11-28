@@ -158,6 +158,12 @@ class AASGovernance:
                 "source": "server_operator_attestation",
             }
 
+    def template_snapshot(self):
+        """Return copies of the registered AAS templates for UI field guidance."""
+        with self._lock:
+            return {key: deepcopy(adapter.template_document)
+                    for key, adapter in self._adapters.items()}
+
     def snapshot(self):
         with self._lock:
             graph, version = self._manager.store.snapshot()
