@@ -150,6 +150,7 @@ async function load() {
   ])
   const [state, context] = await Promise.all([readJson(stateResponse), readJson(contextResponse)])
   if (!Array.isArray(state.documents)) throw new Error('Governance state returned no document list')
+  if (context.version !== state.version) throw new Error('Repository changed while qualification context was being read. Refresh to obtain a consistent snapshot.')
   documents.value = state.documents
   version.value = state.version
   qualification.value = context
