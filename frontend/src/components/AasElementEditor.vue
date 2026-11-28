@@ -119,7 +119,7 @@ async function submit(){
   <section class="aas-editor">
     <div class="aas-editor-heading">
       <div><h3><ShieldCheck :size="17"/> Propose an AAS change</h3><p>{{domainName}} · {{title}}</p></div>
-      <button class="secondary" type="button" :disabled="loading||submitting" @click="refresh"><RefreshCw :size="14"/> Refresh</button>
+      <button class="secondary" type="button" :disabled="loading||submitting" @click="() => refresh()"><RefreshCw :size="14"/> Refresh</button>
     </div>
     <p class="aas-editor-note">Changes are prepared as native AAS Submodel Elements and submitted to SELiRA. The repository is not modified directly by this editor.</p>
     <p v-if="loading" role="status">Resolving native AAS element…</p>
