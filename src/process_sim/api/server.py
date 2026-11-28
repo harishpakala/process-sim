@@ -42,7 +42,7 @@ class Handler(BaseHTTPRequestHandler):
                 return
             try:
                 docs, _, version = self.governance.snapshot()
-                self.send_json(200, {"version": version, "documents": list(docs.values())})
+                self.send_json(200, {"version": version, "documents": list(docs.values()), "templates": self.governance.template_snapshot()})
             except Exception:
                 self.send_json(503, {"error": "Governance unavailable; check reconciliation status"})
             return
